@@ -21,6 +21,7 @@ namespace AutoDealer.Models
         // Constructor
         protected Vehicle(int id, string make, string model, int year, decimal price, string color,int horsepower, string fuelType)
         {
+            Id = 0;
             Id = id;
             Brand = make;
             Model = model;
