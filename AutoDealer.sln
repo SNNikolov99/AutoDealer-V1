@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealer", "AutoDealer\AutoDealer.csproj", "{7F6B5AE6-3D2C-447B-9A28-64126A114832}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealer.Tests", "AutoDealer.Tests\AutoDealer.Tests.csproj", "{02CA7D5F-781E-4049-86E0-14C84420C52E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F6B5AE6-3D2C-447B-9A28-64126A114832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F6B5AE6-3D2C-447B-9A28-64126A114832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F6B5AE6-3D2C-447B-9A28-64126A114832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F6B5AE6-3D2C-447B-9A28-64126A114832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02CA7D5F-781E-4049-86E0-14C84420C52E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02CA7D5F-781E-4049-86E0-14C84420C52E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02CA7D5F-781E-4049-86E0-14C84420C52E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02CA7D5F-781E-4049-86E0-14C84420C52E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43FF7838-F235-4B5B-AED5-7DFE3713B40A}
+	EndGlobalSection
+EndGlobal
