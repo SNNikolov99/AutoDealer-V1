@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AutoDealer.Models
 {
-    class Motorbike : Vehicle
+    public class Motorbike : Vehicle
     {
-        public Motorbike(int id, string make, string model, int year, decimal price, string color, int horsepower, string fuelType) :
-            base(id, make, model, year, price, color, horsepower, fuelType)
+        public Motorbike(string make, string model, int year, decimal price, string color, int horsepower, string fuelType) :
+            base(make, model, year, price, color, horsepower, fuelType)
         {
         }
         public override string GetVehicleType()

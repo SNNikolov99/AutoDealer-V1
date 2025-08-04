@@ -19,11 +19,10 @@ namespace AutoDealer.Models
         public string FuelType { get; set; } // petrol,diesel, electric, hybrid
 
         // Constructor
-        protected Vehicle(int id, string make, string model, int year, decimal price, string color,int horsepower, string fuelType)
+        protected Vehicle(string brand, string model, int year, decimal price, string color,int horsepower, string fuelType)
         {
             Id = 0;
-            Id = id;
-            Brand = make;
+            Brand = brand;
             Model = model;
             Year = year;
             Price = price;
