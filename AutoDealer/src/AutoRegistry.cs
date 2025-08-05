@@ -18,14 +18,16 @@ namespace AutoDealer.Models
         Contains
     }
 
-    class AutoRegistry
+    public class AutoRegistry
     {
         private List<Vehicle> vehicles;
         private int nextId = 1;
 
+        public List<Vehicle> Vehicles => vehicles;
+
         public AutoRegistry(List<Vehicle> vehicles)
         {
-            if(vehicles == null)
+            if (vehicles == null)
             {
                 throw new ArgumentNullException(nameof(vehicles), "Input cannot be null");
             }
@@ -43,6 +45,17 @@ namespace AutoDealer.Models
             if (vehicle == null)
             {
                 throw new ArgumentNullException(nameof(vehicle), "Input cannot be null");
+            }
+
+            if (string.IsNullOrWhiteSpace(vehicle.Brand)
+              || string.IsNullOrWhiteSpace(vehicle.Model)
+              || string.IsNullOrWhiteSpace(vehicle.FuelType)
+              || string.IsNullOrWhiteSpace(vehicle.Color)
+              || vehicle?.HorsePower == null
+              || vehicle?.Price == null
+              || vehicle?.Year == null)
+            {
+                throw new ArgumentException("One or more vehicle fields are missing or invalid");
             }
             vehicle.Id = nextId++;
             vehicles.Add(vehicle);

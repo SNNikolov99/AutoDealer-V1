@@ -21,5 +21,8 @@ namespace AutoDealer.src.Decorators
         }
 
         public abstract void AttachPart();
+
+        public override string GetVehicleType() => _vehicle.GetVehicleType();
+        
     }
 }
