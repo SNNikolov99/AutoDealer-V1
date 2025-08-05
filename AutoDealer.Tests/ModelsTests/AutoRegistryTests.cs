@@ -13,14 +13,47 @@ namespace AutoDealer.Tests.ModelsTests
     {
         //List<Vehicle> vehicles = new List<Vehicle>();
        
-        public AutoRegistry registry = new AutoRegistry();
+        //public AutoRegistry registry = new AutoRegistry();
 
-        
-        
+
+        // 1) Declare once, for all tests
+        private readonly Vehicle v1;
+        private readonly Vehicle v2;
+        private readonly Vehicle v3;
+        private readonly Vehicle v4;
+        private readonly List<Vehicle> allVehicles;
+        private AutoRegistry registry;
+
+        public AutoRegistryTests()
+        {
+            // 2) Initialize your sample vehicles
+            v1 = new Car("VW", "Golf 7", 2018, 35000m, "Metallic grey", 150, "Gasoline");
+            v2 = new Motorbike("Ducati", "Stradale", 2010, 25000m, "red", 170, "Gasoline");
+            v3 = new MiniBus("VW", "Caddy", 2011, 12500m, "white", 130, "Diesel");
+            v4 = new Car("BMW", "330xd", 2018, 35000m, "Pearl black", 272, "Diesel");
+
+            allVehicles = new List<Vehicle> { v1, v2, v3, v4 };
+
+            // 3) Fresh registry for each test (xUnit recreates the test class per [Fact]/[Theory])
+            registry = new AutoRegistry();
+        }
+
+        // 4) Helper to seed the registry with the four vehicles
+        private void SeedRegistry()
+        {
+            registry = new AutoRegistry();      // ensure a clean slate
+            foreach (var v in allVehicles)
+                registry.AddVehicle(v);
+        }
+
+
+
+
         [Fact]
         public void AutoRegistry_AddVehicle_Success()
         {
             //Arange
+            SeedRegistry();
             Vehicle vehicle = new Car("VW","Golf 7", 2018,Convert.ToDecimal(35000),"Mettalic grey",150,"Gasoline");
 
             //Act
@@ -60,15 +93,7 @@ namespace AutoDealer.Tests.ModelsTests
         public void AutoRegistry_SortVehiclesByProperty_ReturnsSortedList(string property , bool isDescending)
         {
             //Arange
-            Vehicle vehicle1 = new Car("VW", "Golf 7", 2018, Convert.ToDecimal(35000), "Mettalic grey", 150, "Gasoline");
-            Vehicle vehicle2 = new Motorbike("Ducati", "Stradale", 2010, Convert.ToDecimal(25000), "red", 170, "Gasoline");
-            Vehicle vehicle3 = new MiniBus("VW", "Caddy", 2011, Convert.ToDecimal(12500), "white", 130, "Diesel");
-            Vehicle vehicle4 = new Car("BMW", "330xd", 2018, Convert.ToDecimal(35000), "Pearl black", 272, "Diesel");
-
-            registry.AddVehicle(vehicle1);
-            registry.AddVehicle(vehicle2);
-            registry.AddVehicle(vehicle3);
-            registry.AddVehicle(vehicle4);
+            SeedRegistry();
 
             //Act
             List<Vehicle> res = registry.SortVehiclesByProperty(property, isDescending);
@@ -88,15 +113,7 @@ namespace AutoDealer.Tests.ModelsTests
         [InlineData("Big Bertha", true)]
         public void AutoRegistry_SortVehiclesByProperty_ThrowsArgException(string property, bool isDescending)
         {
-            Vehicle vehicle1 = new Car("VW", "Golf 7", 2018, Convert.ToDecimal(35000), "Mettalic grey", 150, "Gasoline");
-            Vehicle vehicle2 = new Motorbike("Ducati", "Stradale", 2010, Convert.ToDecimal(25000), "red", 170, "Gasoline");
-            Vehicle vehicle3 = new MiniBus("VW", "Caddy", 2011, Convert.ToDecimal(12500), "white", 130, "Diesel");
-            Vehicle vehicle4 = new Car("BMW", "330xd", 2018, Convert.ToDecimal(35000), "Pearl black", 272, "Diesel");
-
-            registry.AddVehicle(vehicle1);
-            registry.AddVehicle(vehicle2);
-            registry.AddVehicle(vehicle3);
-            registry.AddVehicle(vehicle4);
+            SeedRegistry();
 
             //Act
             Action act = () => registry.SortVehiclesByProperty(property, isDescending);
@@ -117,15 +134,7 @@ namespace AutoDealer.Tests.ModelsTests
         [InlineData (3)]
         public void AutoRegistry_RemoveVehicleByID_VehicleRemoved(int id)
         {
-            Vehicle vehicle1 = new Car("VW", "Golf 7", 2018, Convert.ToDecimal(35000), "Mettalic grey", 150, "Gasoline");
-            Vehicle vehicle2 = new Motorbike("Ducati", "Stradale", 2010, Convert.ToDecimal(25000), "red", 170, "Gasoline");
-            Vehicle vehicle3 = new MiniBus("VW", "Caddy", 2011, Convert.ToDecimal(12500), "white", 130, "Diesel");
-            Vehicle vehicle4 = new Car("BMW", "330xd", 2018, Convert.ToDecimal(35000), "Pearl black", 272, "Diesel");
-
-            registry.AddVehicle(vehicle1);
-            registry.AddVehicle(vehicle2);
-            registry.AddVehicle(vehicle3);
-            registry.AddVehicle(vehicle4);
+            SeedRegistry();
             Vehicle toBeDeleted = registry.Vehicles[id];
 
             registry.RemoveVehicleByID(id);
@@ -134,6 +143,33 @@ namespace AutoDealer.Tests.ModelsTests
             registry.Vehicles.Should().NotContain(v => v.Id == id);
 
 
+        }
+
+
+        [Fact]
+        public void AutoRegistry_RemoveVehicleByID_ThrowsArgException()
+        {
+            //Arrange
+            SeedRegistry();
+
+            //Act
+            Action act = () => registry.RemoveVehicleByID(5);
+
+            //Assert
+            act.Should().Throw<ArgumentException>().WithMessage("No vehicle found with ID 5*");
+        }
+
+        [Theory]
+        [InlineData("Year",2015,FilterOperator.GreaterThan)]
+        public void AutoRegistry_FilterByProperty_ReturnsFilteredList(string property, int value, FilterOperator op)
+        {
+            //Arrange
+            SeedRegistry();
+            //Act
+            List<Vehicle> res = registry.FilterByProperty(property, value.ToString(), op);
+            //Assert
+            res.Count.Should().Be(2);
+            res.Should().Contain(v => v.Year > value);
         }
 
     }
