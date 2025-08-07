@@ -75,8 +75,8 @@ namespace AutoDealer.Tests.ModelsTests
 
             //Assert
             var expected = isDescending
-           ? new[] { "VW", "VW", "Ducati", "BMW" }
-           : new[] { "BMW", "Ducati", "VW", "VW" };
+           ? new[] { "vw", "vw", "ducati", "bmw" }
+           : new[] { "bmw", "ducati", "vw", "vw" };
 
             res.Select(x => x.Brand)
                   .Should().ContainInOrder(expected);

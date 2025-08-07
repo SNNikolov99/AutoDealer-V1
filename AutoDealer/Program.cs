@@ -11,8 +11,8 @@ namespace AutoDealer.ConsoleApp
         static AutoRegistry registry = new AutoRegistry("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer\\resources\\list1.txt");
         static void Main(string[] args)
         {
-            registry.WriteToCSVFile("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer\\resources\\list2.txt");
-            //ShowMainConsole();
+            //registry.WriteToCSVFile("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer\\resources\\list2.txt");
+            ShowMainConsole();
            
         }
 
