@@ -1,4 +1,8 @@
 ﻿using AutoDealer.Models;
+using AutoDealer.src.Decorators;
+using AutoDealer.src.Decorators.CarDecorators;
+using AutoDealer.src.Decorators.MinibusDecorators;
+using AutoDealer.src.Decorators.MotorbikeDecorators;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -13,7 +17,7 @@ namespace AutoDealer.ConsoleApp
         {
             //registry.WriteToCSVFile("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer\\resources\\list2.txt");
             ShowMainConsole();
-           
+
         }
 
         static void ShowMainConsole()
@@ -22,7 +26,7 @@ namespace AutoDealer.ConsoleApp
 
             while (!exit)
             {
-                Console.Clear(); 
+                Console.Clear();
                 Console.WriteLine("\n========================= AutoDealer Registry ==========================");
                 Console.WriteLine("1. Add Vehicle");
                 Console.WriteLine("2. List Vehicles");
@@ -30,7 +34,8 @@ namespace AutoDealer.ConsoleApp
                 Console.WriteLine("4. Filter Vehicles");
                 Console.WriteLine("5. Remove Vehicle");
                 Console.WriteLine("6. Get total sum");
-                Console.WriteLine("7. Exit");
+                Console.WriteLine("7. Modify vehicle by index");
+                Console.WriteLine("8. Exit");
                 Console.Write("Select an option: ");
 
                 var choice = Console.ReadLine();
@@ -46,7 +51,7 @@ namespace AutoDealer.ConsoleApp
                             {
                                 AddVehicle(registry);
                                 Console.WriteLine("Would you like to add another? (Yes , no)");
-                                if(Console.ReadLine().ToLower() == "no")
+                                if (Console.ReadLine().ToLower() == "no")
                                 {
                                     addAnother = false;
                                 }
@@ -82,6 +87,11 @@ namespace AutoDealer.ConsoleApp
                             Console.ReadKey(true);
                             break;
                         case "7":
+                            ModifyExistingVehicle(registry);
+                            Console.WriteLine("\nTo return to the main console, press any key ...");
+                            Console.ReadKey(true);
+                            break;
+                        case "8":
                             exit = true;
                             break;
                         default:
@@ -201,6 +211,67 @@ namespace AutoDealer.ConsoleApp
             Console.WriteLine("\n--------- Total sum ---------------");
             decimal res = registry.GetInventoryTotalAmount();
             Console.WriteLine("Total amount of inventory in stock in leva is: " + res.ToString());
+        }
+
+        static void ModifyExistingVehicle(AutoRegistry registry)
+        {
+            Console.Clear();
+            Console.WriteLine("\n--------- Modify existing vehicle ---------------");
+
+            Console.WriteLine("Enter a ID which you want to modify.(0,1,2,3, etc )");
+            int index = Convert.ToInt32(Console.ReadLine());
+
+            if (index >= registry.Vehicles.Count || index <= 0)
+            {
+                throw new ArgumentException("The list does not contain such index");
+            }
+
+            
+            switch (registry.Vehicles[index].GetVehicleType().ToLower())
+            {
+                case "car":
+                    Console.WriteLine("Would you like a V6 TDI engine? ( Yes,no ):");
+                    if(Console.ReadLine().ToLower() == "yes")
+                    {
+                        var v6 = new V6TDIEngine((Car)registry.Vehicles[index]);
+                        v6.AttachPart();
+                        
+                    }
+                    Console.WriteLine("Would you hybrid traction? ( Yes,no ):");
+                    if ((Console.ReadLine().ToLower() == "yes"))
+                    {
+                        var hybrid = new HybridTraction((Car)registry.Vehicles[index]);
+                        hybrid.AttachPart();
+                    }
+                    break;
+                case "motorbike":
+                    Console.WriteLine("Would you like a 750cc engine? ( Yes,no ):");
+                    if (Console.ReadLine().ToLower() == "yes")
+                    {
+                        var supermoto = new _750ccEngine((Motorbike)registry.Vehicles[index]);
+                        supermoto.AttachPart();
+
+                    }
+                    break;
+                case "minibus":
+                    Console.WriteLine("Would you like the Minibus to be long based? ( Yes,no ):");
+                    if (Console.ReadLine().ToLower() == "yes")
+                    {
+                        var longBase = new LongBase((MiniBus)registry.Vehicles[index]);
+                        longBase.AttachPart();
+
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Would you like a nice color? ( Yes,no ):");
+                    if (Console.ReadLine().ToLower() == "yes")
+                    {
+                        var newColor = new DesignerColorDecocrator(registry.Vehicles[index]);
+                        newColor.AttachPart();
+                    }
+                    break;
+
+            }
         }
     }
 }
