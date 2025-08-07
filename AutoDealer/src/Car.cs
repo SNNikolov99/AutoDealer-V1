@@ -8,8 +8,8 @@ namespace AutoDealer.Models
 {
    public class Car:Vehicle
     {
-        public Car(int id, string make, string model, int year, decimal price, string color, int horsepower, string fuelType) :
-            base(id, make, model, year, price, color, horsepower, fuelType)
+        public Car( string make, string model, int year, decimal price, string color, int horsepower, string fuelType) :
+            base( make, model, year, price, color, horsepower, fuelType)
         {
 
         }

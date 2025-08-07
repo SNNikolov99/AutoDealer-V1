@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,31 +19,52 @@ namespace AutoDealer.Models
         Contains
     }
 
-    class AutoRegistry
+    public class AutoRegistry
     {
         private List<Vehicle> vehicles;
         private int nextId = 1;
 
+        public List<Vehicle> Vehicles => vehicles;
+
         public AutoRegistry(List<Vehicle> vehicles)
         {
-            if(vehicles == null)
+            if (vehicles == null)
             {
                 throw new ArgumentNullException(nameof(vehicles), "Input cannot be null");
             }
-            this.vehicles = vehicles;
+            this.vehicles = new List<Vehicle>(vehicles);
 
         }
+        
+        public AutoRegistry(string filename)
+        {
+            vehicles = new List<Vehicle>();
+            ReadFromCSVFile(filename);
+        }
+
 
         public AutoRegistry()
         {
             vehicles = new List<Vehicle>();
         }
 
+
         public void AddVehicle(Vehicle vehicle)
         {
             if (vehicle == null)
             {
                 throw new ArgumentNullException(nameof(vehicle), "Input cannot be null");
+            }
+
+            if (string.IsNullOrWhiteSpace(vehicle.Brand)
+              || string.IsNullOrWhiteSpace(vehicle.Model)
+              || string.IsNullOrWhiteSpace(vehicle.FuelType)
+              || string.IsNullOrWhiteSpace(vehicle.Color)
+              || vehicle?.HorsePower == null
+              || vehicle?.Price == null
+              || vehicle?.Year == null)
+            {
+                throw new ArgumentException("One or more vehicle fields are missing or invalid");
             }
             vehicle.Id = nextId++;
             vehicles.Add(vehicle);
@@ -163,6 +185,97 @@ namespace AutoDealer.Models
                         return false;
                 }
             }).ToList();
+        }
+
+        public decimal GetInventoryTotalAmount()
+        {
+            decimal acc = 0;
+
+            if (vehicles.Count == 0)
+            {
+                throw new ArgumentException("The Registry is empty");
+            }
+            foreach (Vehicle vehicle in vehicles)
+            {
+                acc += vehicle.Price;
+            }
+
+            return acc;
+        }
+
+        public void ReadFromCSVFile(string filename)
+        {
+            if(string.IsNullOrEmpty(filename) || !System.IO.File.Exists(filename))
+            {
+                throw new ArgumentException("File path is invalid or file is emptry");
+            }
+
+            string[] lines = System.IO.File.ReadAllLines(filename);
+            int row = 0;
+
+            foreach (string line in lines)
+            {
+                if(string.IsNullOrWhiteSpace(line) || line.StartsWith("#"))
+                {
+                    throw new ArgumentException("line number " + row.ToString() + " is empty");
+                }
+
+                string[] parts = line.Split(',');
+                if(parts.Length != 8)
+                {
+                    throw new ArgumentException("There is an emptry field in this row" + row.ToString());
+                }
+
+                var type = parts[0].Trim();
+                var brand = parts[1].Trim();
+                var model = parts[2].Trim();
+                var year = int.Parse(parts[3]);
+                var price = decimal.Parse(parts[4]);
+                var color = parts[5].Trim();
+                var hp = int.Parse(parts[6]);
+                var fuel = parts[7].Trim();
+
+
+                Vehicle vehicle = null;
+
+                switch (type.ToLower()) {
+                    case "car":
+                        vehicle = new Car(brand, model, year, price, color, hp, fuel);
+                        break;
+                    case "minibus":
+                        vehicle = new MiniBus(brand, model, year, price, color, hp, fuel);
+                        break;
+                    case "motorbike":
+                        vehicle = new Motorbike(brand, model, year, price, color, hp, fuel);
+                        break;
+                    default:
+                        throw new ArgumentException("such type doesn`t exist");
+
+
+                }
+
+                if (vehicle != null)
+                {
+                    AddVehicle(vehicle);
+                    row++;
+                }
+            }
+        }
+
+        public void WriteToCSVFile(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                File.Create(filename);
+            }
+            //File.OpenWrite(filename);
+
+            foreach(Vehicle vehicle in Vehicles)
+            {
+                File.AppendAllText(filename, vehicle.ToString() + "\n");
+                
+            }
+            
         }
 
     }

@@ -19,20 +19,26 @@ namespace AutoDealer.Models
         public string FuelType { get; set; } // petrol,diesel, electric, hybrid
 
         // Constructor
-        protected Vehicle(int id, string make, string model, int year, decimal price, string color,int horsepower, string fuelType)
+        protected Vehicle(string brand, string model, int year, decimal price, string color,int horsepower, string fuelType)
         {
+            //toLower method used for string standartisation
             Id = 0;
-            Id = id;
-            Brand = make;
-            Model = model;
+            Brand = brand.ToLower();
+            Model = model.ToLower();
             Year = year;
             Price = price;
-            Color = color;
+            Color = color.ToLower();
             HorsePower = horsepower;
-            FuelType = fuelType;
+            FuelType = fuelType.ToLower();
            
         }
       
         public abstract string GetVehicleType();
+        public override string ToString()
+        {
+            return  $" {Brand.ToString()} , {Model.ToString()} ," +
+                    $" {Year.ToString()} , {Price.ToString()} , {Color.ToString()}," +
+                    $" {HorsePower.ToString()}, {FuelType.ToString()}";
+        }
     }
 }
