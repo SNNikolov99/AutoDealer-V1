@@ -4,15 +4,21 @@ using AutoDealer.src.Decorators.CarDecorators;
 using AutoDealer.src.Decorators.MinibusDecorators;
 using AutoDealer.src.Decorators.MotorbikeDecorators;
 using Microsoft.Win32;
+using Spectre;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 
 namespace AutoDealer.ConsoleApp
 {
     class Program
     {
         static AutoRegistry registry = new AutoRegistry("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer\\resources\\list1.txt");
+        
         static void Main(string[] args)
         {
             //registry.WriteToCSVFile("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer\\resources\\list2.txt");
@@ -34,7 +40,7 @@ namespace AutoDealer.ConsoleApp
                 Console.WriteLine("4. Filter Vehicles");
                 Console.WriteLine("5. Remove Vehicle");
                 Console.WriteLine("6. Get total sum");
-                Console.WriteLine("7. Modify vehicle by index");
+                Console.WriteLine("7. Modify vehicle by ID");
                 Console.WriteLine("8. Exit");
                 Console.Write("Select an option: ");
 
@@ -62,7 +68,8 @@ namespace AutoDealer.ConsoleApp
                             }
                             break;
                         case "2":
-                            ListVehicles(registry.Vehicles);
+                            //ListVehicles(registry.Vehicles);
+                            RenderVehicles(registry.Vehicles);
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
                             break;
@@ -102,6 +109,8 @@ namespace AutoDealer.ConsoleApp
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error: {ex.Message}");
+                    Console.WriteLine("\nTo return to the main console, press any key ...");
+                    Console.ReadKey(true);
                 }
             }
 
@@ -152,19 +161,66 @@ namespace AutoDealer.ConsoleApp
             Console.WriteLine($"Vehicle added with ID: {vehicle.Id}");
         }
 
-        static void ListVehicles(List<Vehicle> vehicles)
+        //static void ListVehicles(List<Vehicle> vehicles)
+        //{
+        //    Console.Clear();
+        //    Console.WriteLine("\n-------------------- Inventory -----------------------");
+        //    if (!vehicles.Any())
+        //    {
+        //        Console.WriteLine("No vehicles in registry.");
+        //        return;
+        //    }
+        //    Console.WriteLine("| ID | Brand | Model | year | Price | Color | Horsepower | Fuel type |");
+        //    foreach (var v in vehicles)
+        //    {
+        //        Console.WriteLine($"(ID: {v.Id})" + v.ToString());
+        //    }
+        //}
+
+
+        //Using Spectre console
+        static void RenderVehicles(List<Vehicle> vehicles)
         {
-            Console.Clear();
-            Console.WriteLine("\n-------------------- Inventory -----------------------");
-            if (!vehicles.Any())
-            {
-                Console.WriteLine("No vehicles in registry.");
-                return;
-            }
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            var table = new Table()
+                .Border(TableBorder.Rounded)
+                .ShowRowSeparators()
+                .Title("[bold green]Auto Registry[/]")
+                .Caption($"[grey]Count: {vehicles.Count()}[/]");
+
+            table.AddColumn("[bold]Id[/]");
+            table.AddColumn("Brand");
+            table.AddColumn("Model");
+            table.AddColumn(new TableColumn("Year").RightAligned());
+            table.AddColumn(new TableColumn("Price").RightAligned());
+            table.AddColumn("Color");
+            table.AddColumn(new TableColumn("HP").RightAligned());
+            table.AddColumn("Fuel");
+
+            var i = 0;
             foreach (var v in vehicles)
             {
-                Console.WriteLine(v.ToString() + $" (ID: {v.Id})");
+                var row = new[]
+                {
+                v.Id.ToString(),
+                v.Brand,
+                v.Model,
+                v.Year.ToString(),
+                v.Price.ToString("N2"),
+                v.Color,
+                v.HorsePower.ToString(),
+                v.FuelType
+            };
+
+                // zebra striping
+                if (i++ % 2 == 1)
+                    table.AddRow(row.Select(c => $"[grey]{Markup.Escape(c)}[/]").ToArray());
+                else
+                    table.AddRow(row.Select(Markup.Escape).ToArray());
             }
+
+            AnsiConsole.Write(table);
         }
 
         static void SortVehicles(AutoRegistry registry)
@@ -177,23 +233,36 @@ namespace AutoDealer.ConsoleApp
             bool desc = descInput?.ToLower() == "y";
 
             var sorted = registry.SortVehiclesByProperty(prop, desc);
-            ListVehicles(sorted);
+
+            //ListVehicles(sorted);
+            RenderVehicles(sorted);
         }
 
         static void FilterVehicles(AutoRegistry registry)
         {
             Console.WriteLine("\n------------ Filter vehicles ---------------");
             Console.Write("Property to filter by (e.g., Brand, Year, Price): ");
-            var prop = Console.ReadLine();
-            Console.WriteLine("Operator: 1.Equals 2.GreaterThan 3.EqualOrGreaterThan 4.LessThan 5.EqualOrLessThan 6.Contains");
+            var prop = Console.ReadLine().ToString().ToLower();
+
+
+            if (prop == "brand" || prop == "model" || prop == "color" || prop == "fuel*type")
+            {
+                Console.WriteLine("Operator:  1.Equals  6.Contains");
+            }
+            else if (prop == "year" || prop == "horsepower" || prop == "price")
+            {
+                Console.WriteLine("Operator:  1.Equals   2.Greater Than   3.Equal Or Greater Than   4.Less Than   5.Equal Or Less Than    6.Contains");
+            }
+
             Console.Write("Choice: ");
             var opChoice = Console.ReadLine();
             var op = (FilterOperator)(int.Parse(opChoice ?? "1") - 1);
             Console.Write("Value: ");
             var value = Console.ReadLine();
-
             var filtered = registry.FilterByProperty(prop, value, op);
-            ListVehicles(filtered);
+
+            //ListVehicles(filtered);
+            RenderVehicles(filtered);
         }
 
         static void RemoveVehicle(AutoRegistry registry)
@@ -219,28 +288,29 @@ namespace AutoDealer.ConsoleApp
             Console.WriteLine("\n--------- Modify existing vehicle ---------------");
 
             Console.WriteLine("Enter a ID which you want to modify.(0,1,2,3, etc )");
-            int index = Convert.ToInt32(Console.ReadLine());
+            int ID = Convert.ToInt32(Console.ReadLine());
 
-            if (index >= registry.Vehicles.Count || index <= 0)
+            //IDs start from 1, not 0
+            if (ID > registry.Vehicles.Count + 1 || ID <= 0)
             {
-                throw new ArgumentException("The list does not contain such index");
+                throw new ArgumentException("The list does not contain such ID");
             }
 
-            
-            switch (registry.Vehicles[index].GetVehicleType().ToLower())
+
+            switch (registry.Vehicles[ID].GetVehicleType().ToLower())
             {
                 case "car":
                     Console.WriteLine("Would you like a V6 TDI engine? ( Yes,no ):");
-                    if(Console.ReadLine().ToLower() == "yes")
+                    if (Console.ReadLine().ToLower() == "yes")
                     {
-                        var v6 = new V6TDIEngine((Car)registry.Vehicles[index]);
+                        var v6 = new V6TDIEngine((Car)registry.Vehicles[ID]);
                         v6.AttachPart();
-                        
+
                     }
                     Console.WriteLine("Would you hybrid traction? ( Yes,no ):");
                     if ((Console.ReadLine().ToLower() == "yes"))
                     {
-                        var hybrid = new HybridTraction((Car)registry.Vehicles[index]);
+                        var hybrid = new HybridTraction((Car)registry.Vehicles[ID]);
                         hybrid.AttachPart();
                     }
                     break;
@@ -248,7 +318,7 @@ namespace AutoDealer.ConsoleApp
                     Console.WriteLine("Would you like a 750cc engine? ( Yes,no ):");
                     if (Console.ReadLine().ToLower() == "yes")
                     {
-                        var supermoto = new _750ccEngine((Motorbike)registry.Vehicles[index]);
+                        var supermoto = new _750ccEngine((Motorbike)registry.Vehicles[ID]);
                         supermoto.AttachPart();
 
                     }
@@ -257,21 +327,23 @@ namespace AutoDealer.ConsoleApp
                     Console.WriteLine("Would you like the Minibus to be long based? ( Yes,no ):");
                     if (Console.ReadLine().ToLower() == "yes")
                     {
-                        var longBase = new LongBase((MiniBus)registry.Vehicles[index]);
+                        var longBase = new LongBase((MiniBus)registry.Vehicles[ID]);
                         longBase.AttachPart();
 
                     }
                     break;
-                default:
-                    Console.WriteLine("Would you like a nice color? ( Yes,no ):");
-                    if (Console.ReadLine().ToLower() == "yes")
-                    {
-                        var newColor = new DesignerColorDecocrator(registry.Vehicles[index]);
-                        newColor.AttachPart();
-                    }
-                    break;
+
 
             }
+
+            Console.WriteLine("Would you like a nice color? ( Yes,no ):");
+            if (Console.ReadLine().ToLower() == "yes")
+            {
+                var newColor = new DesignerColorDecocrator(registry.Vehicles[ID]);
+                newColor.AttachPart();
+            }
         }
+
     }
+   
 }

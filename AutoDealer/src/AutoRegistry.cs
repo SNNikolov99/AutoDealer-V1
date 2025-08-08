@@ -19,11 +19,24 @@ namespace AutoDealer.Models
         Contains
     }
 
+
+    public static class StringExtensions
+    {
+        // have a string look as a property name 
+        public static string CapitalizeFirst(this string s) =>
+            string.IsNullOrEmpty(s)
+                ? s
+                : char.ToUpper(s[0]) + s.Substring(1).ToLower();
+    }
+
+
     public class AutoRegistry
     {
         private List<Vehicle> vehicles;
         private int nextId = 1;
-
+        private string CSVFilename;
+        
+      
         public List<Vehicle> Vehicles => vehicles;
 
         public AutoRegistry(List<Vehicle> vehicles)
@@ -40,6 +53,7 @@ namespace AutoDealer.Models
         {
             vehicles = new List<Vehicle>();
             ReadFromCSVFile(filename);
+            CSVFilename = filename;
         }
 
 
@@ -88,7 +102,7 @@ namespace AutoDealer.Models
                 throw new ArgumentException("Property name cannot be null or empty", nameof(propertyName));
             }
 
-            PropertyInfo prop = typeof(Vehicle).GetProperty(propertyName);
+            PropertyInfo prop = typeof(Vehicle).GetProperty(propertyName.CapitalizeFirst());
             if (prop == null)
             {
                 throw new ArgumentException($"Property '{propertyName}' does not exist");
@@ -112,7 +126,7 @@ namespace AutoDealer.Models
                 throw new ArgumentException("Value cannot be null or empty", nameof(propertyName));
             }
 
-            PropertyInfo prop = typeof(Vehicle).GetProperty(propertyName);
+            PropertyInfo prop = typeof(Vehicle).GetProperty(propertyName.CapitalizeFirst());
             if (prop == null)
             {
                 throw new ArgumentException($"Property '{propertyName}' does not exist");
@@ -142,7 +156,7 @@ namespace AutoDealer.Models
                                 return strVal.Contains(value);
 
                             default:
-                                throw new InvalidOperationException($"Operator '{op}' is not valid for numeric properties.");
+                                throw new InvalidOperationException($"Operator '{op}' is not valid for string properties.");
 
                         }
                     case IComparable cmp:
