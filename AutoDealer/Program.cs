@@ -8,6 +8,7 @@ using Spectre;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -26,32 +27,38 @@ namespace AutoDealer.ConsoleApp
 
         }
 
+
+       
+
         static void ShowMainConsole()
         {
             bool exit = false;
 
             while (!exit)
             {
-                Console.Clear();
-                Console.WriteLine("\n========================= AutoDealer Registry ==========================");
-                Console.WriteLine("1. Add Vehicle");
-                Console.WriteLine("2. List Vehicles");
-                Console.WriteLine("3. Sort Vehicles");
-                Console.WriteLine("4. Filter Vehicles");
-                Console.WriteLine("5. Remove Vehicle");
-                Console.WriteLine("6. Get total sum");
-                Console.WriteLine("7. Modify vehicle by ID");
-                Console.WriteLine("8. Exit");
-                Console.Write("Select an option: ");
+                AnsiConsole.Clear();
 
-                var choice = Console.ReadLine();
-                Console.Clear();
+
+                string choice = AnsiConsole.Prompt(
+             new SelectionPrompt<string>()
+             .Title("\"\\n========================= AutoDealer Registry ==========================\"").
+             AddChoices(new string[]
+             {
+             "Add Vehicle",
+             "List Vehicles",
+             "Sort Vehicles",
+             "Filter Vehicles",
+             "Remove Vehicle",
+             "Get total sum",
+             "Modify vehicle by ID",
+             "Exit"
+             }));
 
                 try
                 {
                     switch (choice)
                     {
-                        case "1":
+                        case "Add Vehicle":
                             bool addAnother = true;
                             while (addAnother)
                             {
@@ -67,38 +74,37 @@ namespace AutoDealer.ConsoleApp
                                 }
                             }
                             break;
-                        case "2":
-                            //ListVehicles(registry.Vehicles);
+                        case "List Vehicles":   
                             RenderVehicles(registry.Vehicles);
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
                             break;
-                        case "3":
+                        case "Sort Vehicles":
                             SortVehicles(registry);
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
                             break;
-                        case "4":
+                        case "Filter Vehicles":
                             FilterVehicles(registry);
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
                             break;
-                        case "5":
+                        case "Remove Vehicle":
                             RemoveVehicle(registry);
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
                             break;
-                        case "6":
+                        case "Get total sum":
                             GetTotalSum(registry);
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
                             break;
-                        case "7":
+                        case "Modify vehicle by ID":
                             ModifyExistingVehicle(registry);
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
                             break;
-                        case "8":
+                        case "Exit":
                             exit = true;
                             break;
                         default:
@@ -116,6 +122,8 @@ namespace AutoDealer.ConsoleApp
 
             Console.WriteLine("Goodbye!");
         }
+
+       
 
         static void AddVehicle(AutoRegistry registry)
         {
@@ -161,22 +169,7 @@ namespace AutoDealer.ConsoleApp
             Console.WriteLine($"Vehicle added with ID: {vehicle.Id}");
         }
 
-        //static void ListVehicles(List<Vehicle> vehicles)
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("\n-------------------- Inventory -----------------------");
-        //    if (!vehicles.Any())
-        //    {
-        //        Console.WriteLine("No vehicles in registry.");
-        //        return;
-        //    }
-        //    Console.WriteLine("| ID | Brand | Model | year | Price | Color | Horsepower | Fuel type |");
-        //    foreach (var v in vehicles)
-        //    {
-        //        Console.WriteLine($"(ID: {v.Id})" + v.ToString());
-        //    }
-        //}
-
+       
 
         //Using Spectre console
         static void RenderVehicles(List<Vehicle> vehicles)
@@ -226,42 +219,95 @@ namespace AutoDealer.ConsoleApp
         static void SortVehicles(AutoRegistry registry)
         {
             Console.WriteLine("\n-------------- Sort registry ---------------");
-            Console.Write("Property to sort by (e.g., Brand, Year, Price): ");
-            var prop = Console.ReadLine();
-            Console.Write("Descending? (y/n): ");
-            var descInput = Console.ReadLine();
-            bool desc = descInput?.ToLower() == "y";
 
-            var sorted = registry.SortVehiclesByProperty(prop, desc);
+            string property = AnsiConsole.Prompt(
+             new SelectionPrompt<string>()
+             .Title("Select a property to sort by")
+             .AddChoices(new string[]
+             {
+                    "Brand",
+                    "Model",
+                    "Year",
+                    "Price",
+                    "Color",
+                    "Horsepower",
+                    "Fuel type"
+             }));
 
-            //ListVehicles(sorted);
+            string descending = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Descending or Ascending?")
+                .AddChoices( new string[] { "Descending", "Ascending" })
+               
+                );
+          
+            bool isDescending = descending == "Descending"? true: false;
+            var sorted = registry.SortVehiclesByProperty(property, isDescending);
+
             RenderVehicles(sorted);
         }
 
         static void FilterVehicles(AutoRegistry registry)
         {
             Console.WriteLine("\n------------ Filter vehicles ---------------");
-            Console.Write("Property to filter by (e.g., Brand, Year, Price): ");
-            var prop = Console.ReadLine().ToString().ToLower();
+            // Console.Write("Property to filter by (e.g., Brand, Year, Price): ");
+            // var prop = Console.ReadLine().ToString().ToLower();
 
 
-            if (prop == "brand" || prop == "model" || prop == "color" || prop == "fuel*type")
+            string property = AnsiConsole.Prompt(
+               new SelectionPrompt<string>()
+               .Title("Select a property to filter by")
+               .AddChoices(new string[]
+               {
+                    "Brand",
+                    "Model",
+                    "Year",
+                    "Price",
+                    "Color",
+                    "Horsepower",
+                    "Fuel type"
+               })).ToLower();
+
+
+            FilterOperator op = FilterOperator.Contains;
+
+            if (property == "brand" || property == "model" || property == "color" || property == "fuel*type")
             {
-                Console.WriteLine("Operator:  1.Equals  6.Contains");
+                op = AnsiConsole.Prompt(
+                  new SelectionPrompt<FilterOperator>()
+                  .Title("Select an operation")
+                  .AddChoices(new FilterOperator[]
+                  {
+                        FilterOperator.Equals,
+                        FilterOperator.Contains
+                        
+                  }));
+
             }
-            else if (prop == "year" || prop == "horsepower" || prop == "price")
+            else if (property == "year" || property == "horsepower" || property == "price")
             {
-                Console.WriteLine("Operator:  1.Equals   2.Greater Than   3.Equal Or Greater Than   4.Less Than   5.Equal Or Less Than    6.Contains");
+                op = AnsiConsole.Prompt(
+                   new SelectionPrompt<FilterOperator>()
+                   .Title("Select a property to filter by")
+                   .AddChoices(new FilterOperator[]
+                   {
+                         FilterOperator.Equals,
+                         FilterOperator.GreaterThan,
+                         FilterOperator.EqualOrGreaterThan,
+                         FilterOperator.LessThan,
+                         FilterOperator.EqualOrLessThan,
+                         FilterOperator.Contains   
+                   }));
+
+
+                
             }
 
-            Console.Write("Choice: ");
-            var opChoice = Console.ReadLine();
-            var op = (FilterOperator)(int.Parse(opChoice ?? "1") - 1);
+         
             Console.Write("Value: ");
             var value = Console.ReadLine();
-            var filtered = registry.FilterByProperty(prop, value, op);
+            var filtered = registry.FilterByProperty(property, value, op);
 
-            //ListVehicles(filtered);
             RenderVehicles(filtered);
         }
 
