@@ -5,8 +5,11 @@ using System.Reflection;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using AutoDealerV2.src.Classes;
 
-namespace AutoDealer.Models
+
+
+namespace AutoDealerV2.src.Services
 {
 
     public enum FilterOperator
@@ -30,37 +33,32 @@ namespace AutoDealer.Models
     }
 
 
-    public class AutoRegistry
+    public class AutoRegistryService
     {
         private List<Vehicle> vehicles;
         private int nextId = 1;
-        private string CSVFilename;
         
       
         public List<Vehicle> Vehicles => vehicles;
 
-        public AutoRegistry(List<Vehicle> vehicles)
+        public AutoRegistryService(List<Vehicle> vehicles)
         {
             if (vehicles == null)
             {
                 throw new ArgumentNullException(nameof(vehicles), "Input cannot be null");
             }
-            this.vehicles = new List<Vehicle>(vehicles);
+            this.vehicles = vehicles;
+            nextId = vehicles.Max(v => v.Id);
 
         }
         
-        public AutoRegistry(string filename)
+        public AutoRegistryService()
         {
             vehicles = new List<Vehicle>();
-            ReadFromCSVFile(filename);
-            CSVFilename = filename;
+            
         }
 
 
-        public AutoRegistry()
-        {
-            vehicles = new List<Vehicle>();
-        }
 
 
         public void AddVehicle(Vehicle vehicle)
@@ -217,80 +215,7 @@ namespace AutoDealer.Models
             return acc;
         }
 
-        public void ReadFromCSVFile(string filename)
-        {
-            if(string.IsNullOrEmpty(filename) || !System.IO.File.Exists(filename))
-            {
-                throw new ArgumentException("File path is invalid or file is emptry");
-            }
-
-            string[] lines = System.IO.File.ReadAllLines(filename);
-            int row = 0;
-
-            foreach (string line in lines)
-            {
-                if(string.IsNullOrWhiteSpace(line) || line.StartsWith("#"))
-                {
-                    throw new ArgumentException("line number " + row.ToString() + " is empty");
-                }
-
-                string[] parts = line.Split(',');
-                if(parts.Length != 8)
-                {
-                    throw new ArgumentException("There is an emptry field in this row" + row.ToString());
-                }
-
-                var type = parts[0].Trim();
-                var brand = parts[1].Trim();
-                var model = parts[2].Trim();
-                var year = int.Parse(parts[3]);
-                var price = decimal.Parse(parts[4]);
-                var color = parts[5].Trim();
-                var hp = int.Parse(parts[6]);
-                var fuel = parts[7].Trim();
-
-
-                Vehicle vehicle = null;
-
-                switch (type.ToLower()) {
-                    case "car":
-                        vehicle = new Car(brand, model, year, price, color, hp, fuel);
-                        break;
-                    case "minibus":
-                        vehicle = new MiniBus(brand, model, year, price, color, hp, fuel);
-                        break;
-                    case "motorbike":
-                        vehicle = new Motorbike(brand, model, year, price, color, hp, fuel);
-                        break;
-                    default:
-                        throw new ArgumentException("such type doesn`t exist");
-
-
-                }
-
-                if (vehicle != null)
-                {
-                    AddVehicle(vehicle);
-                    row++;
-                }
-            }
-        }
-
-        public void WriteToCSVFile(string filename)
-        {
-            if (!File.Exists(filename))
-            {
-                File.Create(filename);
-            }
-            //File.OpenWrite(filename);
-
-            foreach(Vehicle vehicle in Vehicles)
-            {
-                File.AppendAllText(filename, vehicle.ToString() + "\n");
-                
-            }
-            
-        }
+        
 
     }
 }

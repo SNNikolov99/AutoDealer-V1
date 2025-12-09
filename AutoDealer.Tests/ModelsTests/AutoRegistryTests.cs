@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AutoDealer.Models;
+using AutoDealerV2.src.Services;
 using FluentAssertions;
 using Microsoft.Win32;
+using AutoDealerV2.src.Classes;
 
-namespace AutoDealer.Tests.ModelsTests
+
+
+namespace AutoDealerV2.Tests.ModelsTests
 {
     public class AutoRegistryTests
     {
         //List<Vehicle> vehicles = new List<Vehicle>();
        
-        public AutoRegistry registry = new AutoRegistry();
+        public AutoRegistryService registry = new AutoRegistryService();
 
         
         

@@ -1,8 +1,9 @@
-﻿using AutoDealer.Models;
-using AutoDealer.src.Decorators;
-using AutoDealer.src.Decorators.CarDecorators;
-using AutoDealer.src.Decorators.MinibusDecorators;
-using AutoDealer.src.Decorators.MotorbikeDecorators;
+﻿using AutoDealerV2.src.Classes;
+using AutoDealerV2.src.Services;
+using AutoDealerV2.src.Decorators;
+using AutoDealerV2.src.Decorators.CarDecorators;
+using AutoDealerV2.src.Decorators.MotorbikeDecorators;
+using AutoDealerV2.src.Decorators.MinibusDecorators;
 using Microsoft.Win32;
 using Spectre;
 using Spectre.Console;
@@ -14,23 +15,26 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace AutoDealer.ConsoleApp
+namespace AutoDealerV2
 {
     class Program
     {
-        static AutoRegistryService registry = new AutoRegistryService("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer\\resources\\list1.txt");
+         
+        
+       
         
         static void Main(string[] args)
         {
-            //registry.WriteToCSVFile("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer\\resources\\list2.txt");
-            ShowMainConsole();
+            SerialisationService serialisationService = new SerialisationService("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer.v2\\resources\\list1.csv");
+            AutoRegistryService registry = new AutoRegistryService(serialisationService.Load());
+            ShowMainConsole(registry,serialisationService);
 
         }
 
 
-       
 
-        static void ShowMainConsole()
+
+        static void ShowMainConsole(AutoRegistryService registry, SerialisationService serialisationService)
         {
             bool exit = false;
 
@@ -74,7 +78,7 @@ namespace AutoDealer.ConsoleApp
                                 }
                             }
                             break;
-                        case "List Vehicles":   
+                        case "List Vehicles":
                             RenderVehicles(registry.Vehicles);
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
@@ -123,7 +127,7 @@ namespace AutoDealer.ConsoleApp
             Console.WriteLine("Goodbye!");
         }
 
-       
+
 
         static void AddVehicle(AutoRegistryService registry)
         {
@@ -169,7 +173,7 @@ namespace AutoDealer.ConsoleApp
             Console.WriteLine($"Vehicle added with ID: {vehicle.Id}");
         }
 
-       
+
 
         //Using Spectre console
         static void RenderVehicles(List<Vehicle> vehicles)
@@ -238,11 +242,11 @@ namespace AutoDealer.ConsoleApp
             string descending = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Descending or Ascending?")
-                .AddChoices( new string[] { "Descending", "Ascending" })
-               
+                .AddChoices(new string[] { "Descending", "Ascending" })
+
                 );
-          
-            bool isDescending = descending == "Descending"? true: false;
+
+            bool isDescending = descending == "Descending" ? true : false;
             var sorted = registry.SortVehiclesByProperty(property, isDescending);
 
             RenderVehicles(sorted);
@@ -281,7 +285,7 @@ namespace AutoDealer.ConsoleApp
                   {
                         FilterOperator.Equals,
                         FilterOperator.Contains
-                        
+
                   }));
 
             }
@@ -297,14 +301,14 @@ namespace AutoDealer.ConsoleApp
                          FilterOperator.EqualOrGreaterThan,
                          FilterOperator.LessThan,
                          FilterOperator.EqualOrLessThan,
-                         FilterOperator.Contains   
+                         FilterOperator.Contains
                    }));
 
 
-                
+
             }
 
-         
+
             Console.Write("Value: ");
             var value = Console.ReadLine();
             var filtered = registry.FilterByProperty(property, value, op);
@@ -355,7 +359,7 @@ namespace AutoDealer.ConsoleApp
 
                     }
                     Console.WriteLine("Would you hybrid traction? ( Yes,no ):");
-                    if ((Console.ReadLine().ToLower() == "yes"))
+                    if (Console.ReadLine().ToLower() == "yes")
                     {
                         var hybrid = new HybridTraction((Car)registry.Vehicles[ID]);
                         hybrid.AttachPart();
@@ -392,5 +396,5 @@ namespace AutoDealer.ConsoleApp
         }
 
     }
-   
+
 }

@@ -75,8 +75,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\AutoRegistry.cs" />
-    <Compile Include="src\Car.cs" />
+    <Compile Include="src\Services\AutoRegistryService.cs" />
+    <Compile Include="src\Classes\Car.cs" />
     <Compile Include="src\Decorators\CarDecorators\CarDecorator.cs" />
     <Compile Include="src\Decorators\CarDecorators\HybridTraction.cs" />
     <Compile Include="src\Decorators\CarDecorators\V6TDIEngine.cs" />
@@ -86,9 +86,13 @@
     <Compile Include="src\Decorators\MotorbikeDecorators\750ccEngine.cs" />
     <Compile Include="src\Decorators\MotorbikeDecorators\MotobikeDecorator.cs" />
     <Compile Include="src\Decorators\VehicleDecorator.cs" />
-    <Compile Include="src\MiniBus.cs" />
-    <Compile Include="src\Motorbike.cs" />
-    <Compile Include="src\Vehicle.cs" />
+    <Compile Include="src\Classes\MiniBus.cs" />
+    <Compile Include="src\Classes\Motorbike.cs" />
+    <Compile Include="src\Services\Serialisation\CSVSerialiserService.cs" />
+    <Compile Include="src\Services\Serialisation\ISerializer.cs" />
+    <Compile Include="src\Services\Serialisation\JSONSerialiserService.cs" />
+    <Compile Include="src\Services\SerialisationService.cs" />
+    <Compile Include="src\Classes\Vehicle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

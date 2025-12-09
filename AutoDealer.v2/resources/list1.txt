@@ -1,0 +1,15 @@
+Car,Ford,Focus,2019,20000,Red,150,Gasoline
+Minibus,Mercedes,Vito,2020,35000,White,120,Diesel
+Motorbike,Ducati,Monster,2021,16000,Black,110,Gasoline
+Car,Tesla,Model 3,2021,45000,Blue,283,Electric
+Minibus,Volkswagen,Transporter,2018,30000,Silver,130,Diesel
+Car,Toyota,Corolla,2017,18000,Gray,132,Gasoline
+Motorbike,Yamaha,MT-07,2018,7500,Matte Black,74,Gasoline
+Minibus,Renault,Trafic,2019,28000,White,115,Diesel
+Car,Honda,Civic,2022,22000,Blue,158,Gasoline
+Motorbike,Kawasaki,Ninja ZX-6R,2020,12000,Green,128,Gasoline
+Car,BMW,3 Series,2020,35000,Black,255,Gasoline
+Minibus,Fiat,Ducato,2021,33000,White,140,Diesel
+Motorbike,Harley-Davidson,Street 750,2019,8000,Black,58,Gasoline
+Car,Chevrolet,Impala,2016,17000,Red,305,Gasoline
+Minibus,Nissan,Primastar,2018,29000,Silver,125,Diesel
