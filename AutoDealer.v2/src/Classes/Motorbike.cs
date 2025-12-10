@@ -8,13 +8,26 @@ namespace AutoDealerV2.src.Classes
 {
     public class Motorbike : Vehicle
     {
-        public Motorbike(string make, string model, int year, decimal price, string color, int horsepower, string fuelType) :
-            base(make, model, year, price, color, horsepower, fuelType)
+        public Motorbike(int Id,string make, string model, int year, decimal price, string color, int horsepower, string fuelType) :
+            base(Id, make, model, year, price, color, horsepower, fuelType)
+        {
+        }
+
+        public Motorbike( string make, string model, int year, decimal price, string color, int horsepower, string fuelType) :
+           base( make, model, year, price, color, horsepower, fuelType)
         {
         }
         public override string GetVehicleType()
         {
             return "Motorbike";
         }
+
+        public override string ToString()
+        {
+            return $" {Id.ToString()},motorbike , {Brand.ToString()} , {Model.ToString()} ," +
+                    $" {Year.ToString()} , {Price.ToString()} , {Color.ToString()}," +
+                    $" {HorsePower.ToString()}, {FuelType.ToString()}";
+        }
+
     }
 }

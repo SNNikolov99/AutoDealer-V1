@@ -8,8 +8,14 @@ namespace AutoDealerV2.src.Classes
 {
    public class Car:Vehicle
     {
+        public Car( int Id,string make, string model, int year, decimal price, string color, int horsepower, string fuelType) :
+            base( Id,make, model, year, price, color, horsepower, fuelType)
+        {
+
+        }
+
         public Car( string make, string model, int year, decimal price, string color, int horsepower, string fuelType) :
-            base( make, model, year, price, color, horsepower, fuelType)
+          base( make, model, year, price, color, horsepower, fuelType)
         {
 
         }
@@ -18,5 +24,13 @@ namespace AutoDealerV2.src.Classes
         {
             return "Car";
         }
+
+        public override string ToString()
+        {
+            return $" {Id.ToString()}, car, {Brand.ToString()} , {Model.ToString()} ," +
+                    $" {Year.ToString()} , {Price.ToString()} , {Color.ToString()}," +
+                    $" {HorsePower.ToString()}, {FuelType.ToString()}";
+        }
+
     }
 }

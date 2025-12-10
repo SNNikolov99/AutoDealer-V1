@@ -48,7 +48,7 @@ namespace AutoDealerV2.src.Services
                 throw new ArgumentNullException(nameof(vehicles), "Input cannot be null");
             }
             this.vehicles = vehicles;
-            nextId = vehicles.Max(v => v.Id);
+            nextId = vehicles.Max(v => v.Id) + 1;
 
         }
         

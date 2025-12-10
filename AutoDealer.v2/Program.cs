@@ -44,19 +44,19 @@ namespace AutoDealerV2
 
 
                 string choice = AnsiConsole.Prompt(
-             new SelectionPrompt<string>()
-             .Title("\"\\n========================= AutoDealer Registry ==========================\"").
-             AddChoices(new string[]
-             {
-             "Add Vehicle",
-             "List Vehicles",
-             "Sort Vehicles",
-             "Filter Vehicles",
-             "Remove Vehicle",
-             "Get total sum",
-             "Modify vehicle by ID",
-             "Exit"
-             }));
+                     new SelectionPrompt<string>()
+                     .Title("\"\\n========================= AutoDealer Registry ==========================\"").
+                     AddChoices(new string[]
+                     {
+                     "Add Vehicle",
+                     "List Vehicles",
+                     "Sort Vehicles",
+                     "Filter Vehicles",
+                     "Remove Vehicle",
+                     "Get total sum",
+                     "Modify vehicle by ID",
+                     "Save & Exit"
+                     }));
 
                 try
                 {
@@ -108,7 +108,8 @@ namespace AutoDealerV2
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
                             break;
-                        case "Exit":
+                        case "Save & Exit":
+                            serialisationService.Save(registry.Vehicles);
                             exit = true;
                             break;
                         default:
@@ -394,6 +395,9 @@ namespace AutoDealerV2
                 newColor.AttachPart();
             }
         }
+
+
+       
 
     }
 
