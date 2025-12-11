@@ -32,3 +32,12 @@ Realise the logic with console first and then with winforms. Don`t forget to cre
 The idea is practise the principles of OOP, unit testing and the decorator design pattern. You have one week starting 31.07.2025. Good luck
 
 For now, make the registry a list
+
+TODO:
+ - Implement the builder pattern when adding a new vehicle
+ - Change Decorators to:
+        PolicePackage - simulates addition of police equipment on a vehicle
+        MedicalPackage - simulates addition of medical equipment on a vehicle
+        UtilityPackage - simulates addition of practical utilities such as instrument rows on a vehicle
+
+        

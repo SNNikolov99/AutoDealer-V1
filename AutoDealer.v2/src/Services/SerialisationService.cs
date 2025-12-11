@@ -19,6 +19,13 @@ namespace AutoDealerV2.src.Services
         {
             this.pathname = pathname;
 
+            if (!File.Exists(pathname))
+            {
+                File.Create(pathname).Close();
+            }
+
+            
+
             string ext = Path.GetExtension(pathname).ToLower();
 
             switch (ext)

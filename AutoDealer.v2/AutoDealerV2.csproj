@@ -8,6 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="src\Decorators\CarDecorators\**" />
+    <Compile Remove="src\Decorators\MinibusDecorators\**" />
+    <Compile Remove="src\Decorators\MotorbikeDecorators\**" />
+    <EmbeddedResource Remove="src\Decorators\CarDecorators\**" />
+    <EmbeddedResource Remove="src\Decorators\MinibusDecorators\**" />
+    <EmbeddedResource Remove="src\Decorators\MotorbikeDecorators\**" />
+    <None Remove="src\Decorators\CarDecorators\**" />
+    <None Remove="src\Decorators\MinibusDecorators\**" />
+    <None Remove="src\Decorators\MotorbikeDecorators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="src\Decorators\DesignerColorDecocrator.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="resources\list1.txt" />
     <Content Include="resources\list2.txt" />
   </ItemGroup>

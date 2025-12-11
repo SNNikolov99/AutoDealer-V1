@@ -19,20 +19,22 @@ namespace AutoDealerV2
 {
     class Program
     {
-         
-        
-       
-        
         static void Main(string[] args)
         {
+
+            //if (args.Length == 0)
+            //{
+            //    Console.WriteLine("Usage: AutoRegistry <path-to-file>");
+            //    return;
+            //}
+
+           // string filePath = args[0];
+
             SerialisationService serialisationService = new SerialisationService("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer.v2\\resources\\list1.csv");
             AutoRegistryService registry = new AutoRegistryService(serialisationService.Load());
             ShowMainConsole(registry,serialisationService);
 
         }
-
-
-
 
         static void ShowMainConsole(AutoRegistryService registry, SerialisationService serialisationService)
         {
@@ -104,7 +106,7 @@ namespace AutoDealerV2
                             Console.ReadKey(true);
                             break;
                         case "Modify vehicle by ID":
-                            ModifyExistingVehicle(registry);
+                            //ModifyExistingVehicle(registry);
                             Console.WriteLine("\nTo return to the main console, press any key ...");
                             Console.ReadKey(true);
                             break;
@@ -156,17 +158,17 @@ namespace AutoDealerV2
             switch (typeChoice)
             {
                 case "1":
-                    vehicle = new Car(brand, model, year, price, color, hp, fuel);
+                    vehicle = new Car(brand!, model!, year, price, color!, hp, fuel!);
                     break;
                 case "2":
-                    vehicle = new MiniBus(brand, model, year, price, color, hp, fuel);
+                    vehicle = new MiniBus(brand!, model!, year, price, color!, hp, fuel!);
                     break;
                 case "3":
-                    vehicle = new Motorbike(brand, model, year, price, color, hp, fuel);
+                    vehicle = new Motorbike(brand!, model!, year, price, color!, hp, fuel!);
                     break;
                 default:
                     Console.WriteLine("Unknown type, defaulting to Car.");
-                    vehicle = new Car(brand, model, year, price, color, hp, fuel);
+                    vehicle = new Car(brand!, model!, year, price, color!, hp, fuel!);
                     break;
             }
 
@@ -179,7 +181,7 @@ namespace AutoDealerV2
         //Using Spectre console
         static void RenderVehicles(List<Vehicle> vehicles)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            //Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             var table = new Table()
                 .Border(TableBorder.Rounded)

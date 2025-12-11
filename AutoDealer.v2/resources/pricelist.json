@@ -1,0 +1,373 @@
+{
+    "Models": {
+        "Golf 7": {
+            "Type": "Car",
+            "BasePrice": 18000,
+            "DefaultEngine": "1.5 TSI 130hp",
+            "AvailableEngines": [
+                "1.5 TSI 130hp",
+                "1.5 TSI 150hp",
+                "2.0 TSI 190HP",
+                "2.0 TSI 230HP",
+                "2.0 TSI 280HP",
+                "2.0 TDI 150hp",
+                "2.0 TDI 185hp"
+            ],
+            "AvailableColors": [
+                "Pure White",
+                "Deep Black Pearl",
+                "Atlantic Blue"
+            ],
+            "AvailablePackages": [
+                "Comfort Pack",
+                "Mild Hybrid Pack",
+                "R-Line Pack"
+            ]
+        },
+        "Golf 7R": {
+            "Type": "Car",
+            "BasePrice": 32000,
+            "DefaultEngine": "2.0 TSI 280hp",
+            "AvailableEngines": [
+                "2.5 TSI 380hp",
+                "2.0 TSI 280hp"
+            ],
+            "AvailableColors": [
+                "Pure White",
+                "Deep Black Pearl",
+                "Atlantic Blue",
+                "BRG",
+                "Burgundy Red"
+            ],
+            "AvailablePackages": [
+                "Comfort Pack",
+                "R-Line Pack",
+                "Performance Hybrid Pack"
+            ]
+        },
+        "Tiguan 2": {
+            "Type": "Car",
+            "BasePrice": 25000,
+            "DefaultEngine": "1.5 TSI 150hp",
+            "AvailableEngines": [
+                "1.5 TSI 150hp",
+                "2.0 TDI 150hp",
+                "2.0 TDI 185hp",
+                "2.0 TSI 190hp",
+                "2.0 TSI 230hp",
+                "2.0 TSI 280hp",
+                "3.0 TDI 230hp"
+            ],
+            "AvailableColors": [
+                "Pure White",
+                "Reflex Silver",
+                "Deep Black Pearl",
+                "BRG",
+                "Mild Yellow",
+                "Burgundy Red"
+            ],
+            "AvailablePackages": [
+                "Comfort Pack",
+                "Mild Hybrid Pack",
+                "R-Line Pack"
+            ]
+        },
+        "T-Roc": {
+            "Type": "Car",
+            "BasePrice": 21000,
+            "DefaultEngine": "1.5 TSI 150hp",
+            "AvailableEngines": [
+                "1.5 TSI 150hp",
+                "2.0 TDI 150hp",
+                "2.0 TDI 185hp",
+                "2.0 TSI 190hp",
+                "2.0 TSI 230hp"
+            ],
+            "AvailableColors": [
+                "Pure White",
+                "Reflex Silver",
+                "Deep Black Pearl",
+                "BRG",
+                "Mild Yellow",
+                "Burgundy Red",
+                "Atlantic Blue"
+            ],
+            "AvailablePackages": [
+                "Comfort Pack",
+                "Mild Hybrid Pack",
+                "R-Line Pack"
+            ]
+        },
+        "Polo 7": {
+            "Type": "Car",
+            "BasePrice": 17000,
+            "DefaultEngine": "1.5 TSI 130hp",
+            "AvailableEngines": [
+                "1.5 TSI 130hp",
+                "1.5 TSI 150hp",
+                "2.0 TSI 190hp"
+            ],
+            "AvailableColors": [
+                "Pure White",
+                "Reflex Silver",
+                "Deep Black Pearl",
+                "BRG",
+                "Mild Yellow",
+                "Burgundy Red"
+            ],
+            "AvailablePackages": [
+                "Comfort Pack",
+                "Mild Hybrid Pack",
+                "R-Line Pack"
+            ]
+        },
+        "Passat 7": {
+            "Type": "Car",
+            "BasePrice": 27000,
+            "DefaultEngine": "2.0 TDI 150hp",
+            "AvailableEngines": [
+                "2.0 TDI 150hp",
+                "2.0 TDI 185hp",
+                "2.0 TSI 190hp",
+                "2.0 TSI 230hp",
+                "3.0 TDI 230hp"
+            ],
+            "AvailableColors": [
+                "Pure White",
+                "Reflex Silver",
+                "Deep Black Pearl",
+                "Atlantic Blue",
+                "BRG",
+                "Burgundy Red"
+            ],
+            "AvailablePackages": [
+                "Comfort Pack",
+                "Mild Hybrid Pack",
+                "R-Line Pack"
+            ]
+        },
+        "Transporter T7": {
+            "Type": "Minibus",
+            "BasePrice": 29000,
+            "DefaultEngine": "2.0 TDI 150hp",
+            "AvailableEngines": [
+                "2.0 TDI 150hp",
+                "2.0 TDI 185hp",
+                "3.0 TDI 230hp"
+            ],
+            "AvailableColors": [
+                "Candy White",
+                "Indium Grey Metallic",
+                "BRG",
+                "Mild Yellow",
+                "Burgundy Red"
+            ],
+            "AvailablePackages": [
+                "Cargo Pack",
+                "Passenger Pack"
+            ]
+        },
+        "Caddy": {
+            "Type": "Minibus",
+            "BasePrice": 22000,
+            "DefaultEngine": "2.0 TDI 150hp",
+            "AvailableEngines": [
+                "2.0 TDI 150hp",
+                "2.0 TDI 185hp"
+            ],
+            "AvailableColors": [
+                "Pure White",
+                "Indium Grey Metallic",
+                "BRG",
+                "Mild Yellow",
+                "Burgundy Red"
+            ],
+            "AvailablePackages": [
+                "Cargo Pack",
+                "Passenger Pack"
+            ]
+        },
+        "Ducati Monster": {
+            "Type": "Motorbike",
+            "BasePrice": 13000,
+            "DefaultEngine": "937cc",
+            "AvailableEngines": [
+                "937cc"
+            ],
+            "AvailableColors": [
+                "Ducati Red",
+                "Dark Stealth"
+            ],
+            "AvailablePackages": [
+                "Sport Pack",
+                "Touring Pack"
+            ]
+        },
+        "Ducati Panigale V4": {
+            "Type": "Motorbike",
+            "BasePrice": 25000,
+            "DefaultEngine": "1103cc",
+            "AvailableEngines": [
+                "1103cc"
+            ],
+            "AvailableColors": [
+                "Ducati Red",
+                "Dark Stealth"
+            ],
+            "AvailablePackages": [
+                "Sport Pack",
+                "Touring Pack"
+            ]
+        },
+        "Ducati Scrambler 800": {
+            "Type": "Motorbike",
+            "BasePrice": 10500,
+            "DefaultEngine": "803cc",
+            "AvailableEngines": [
+                "803cc"
+            ],
+            "AvailableColors": [
+                "Ducati Red",
+                "Dark Stealth",
+                "Mild Yellow"
+            ],
+            "AvailablePackages": [
+                "Touring Pack",
+                "Sport Pack"
+            ]
+        }
+    },
+    "Engines": {
+        "1.5 TSI 130hp": {
+            "Price": 0,
+            "Horsepower": 130,
+            "FuelType": "Petrol"
+        },
+        "1.5 TSI 150hp": {
+            "Price": 1500,
+            "Horsepower": 150,
+            "FuelType": "Petrol"
+        },
+        "2.0 TDI 150hp": {
+            "Price": 2000,
+            "Horsepower": 150,
+            "FuelType": "Diesel"
+        },
+        "2.0 TDI 204hp": {
+            "Price": 3500,
+            "Horsepower": 204,
+            "FuelType": "Diesel"
+        },
+        "2.0 TSI 190hp": {
+            "Price": 3800,
+            "Horsepower": 190,
+            "FuelType": "Petrol"
+        },
+        "2.0 TSI 230hp": {
+            "Price": 5200,
+            "Horsepower": 230,
+            "FuelType": "Petrol"
+        },
+
+        "2.0 TSI 280hp": {
+            "Price": 6800,
+            "Horsepower": 280,
+            "FuelType": "Petrol"
+        },
+        "2.5 TSI 380hp": {
+            "Price": 10500,
+            "Horsepower": 380,
+            "FuelType": "Petrol"
+        },
+        "2.0 TDI 185hp": {
+            "Price": 4500,
+            "Horsepower": 185,
+            "FuelType": "Diesel"
+        },
+
+        "3.0 TDI 230hp": {
+            "Price": 7200,
+            "Horsepower": 230,
+            "FuelType": "Diesel"
+        },
+
+        "3.0 TDI 290hp": {
+            "Price": 8800,
+            "Horsepower": 290,
+            "FuelType": "Diesel"
+        },
+        "803cc": {
+            "Price": 1200,
+            "Horsepower": 73,
+            "FuelType": "Petrol"
+        },
+        "937cc": {
+            "Price": 1800,
+            "Horsepower": 111,
+            "FuelType": "Petrol"
+        },
+        "1103cc": {
+            "Price": 4500,
+            "Horsepower": 210,
+            "FuelType": "Petrol"
+        }
+    },
+    "Colors": {
+        "Pure White": 0,
+        "Deep Black Pearl": 500,
+        "Atlantic Blue": 650,
+        "Reflex Silver": 450,
+        "Candy White": 0,
+        "Indium Grey Metallic": 430,
+        "Ducati Red": 0,
+        "Dark Stealth": 300,
+        "BRG": 700,
+        "Mild Yellow": 550,
+        "Burgundy Red": 800
+    },
+    "Packages": {
+        "Comfort Pack": {
+            "Price": 1200,
+            "Description": "Heated seats, dual-zone AC, better infotainment"
+        },
+
+        "R-Line Pack": {
+            "Price": 2800,
+            "SportSuspension": true,
+            "ExteriorTrim": "R-Line Styling"
+        },
+
+        "Cargo Pack": {
+            "Price": 1500,
+            "ExtraSpace": true,
+            "ReinforcedFloor": true
+        },
+
+        "Passenger Pack": {
+            "Price": 2000,
+            "SeatConfig": "7-seater",
+            "InteriorTrim": "Comfort"
+        },
+
+        "Touring Pack": {
+            "Price": 900,
+            "LuggageRacks": true
+        },
+
+        "Sport Pack": {
+            "Price": 1300,
+            "PerformanceMode": true
+        },
+        "Mild Hybrid Pack": {
+            "Price": 3200,
+            "HorsepowerBoost": 80,
+            "FuelTypeOverride": "Hybrid"
+        },
+        "Performance Hybrid Pack": {
+            "Price": 7500,
+            "HorsepowerBoost": 120,
+            "FuelTypeOverride": "Hybrid"
+        }
+
+    }
+}

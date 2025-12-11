@@ -48,7 +48,7 @@ namespace AutoDealerV2.src.Services
                 throw new ArgumentNullException(nameof(vehicles), "Input cannot be null");
             }
             this.vehicles = vehicles;
-            nextId = vehicles.Max(v => v.Id) + 1;
+            nextId = vehicles.Count!=0? vehicles.Max(v => v.Id) + 1 : 1;
 
         }
         
@@ -84,7 +84,7 @@ namespace AutoDealerV2.src.Services
 
         public void RemoveVehicleByID(int id)
         {
-            Vehicle vehicle = vehicles.FirstOrDefault(v => v.Id == id);
+            Vehicle? vehicle = vehicles.FirstOrDefault(v => v.Id == id);
             if (vehicle == null)
             {
                 throw new ArgumentException($"No vehicle found with ID {id}");
@@ -100,7 +100,7 @@ namespace AutoDealerV2.src.Services
                 throw new ArgumentException("Property name cannot be null or empty", nameof(propertyName));
             }
 
-            PropertyInfo prop = typeof(Vehicle).GetProperty(propertyName.CapitalizeFirst());
+            PropertyInfo? prop = typeof(Vehicle).GetProperty(propertyName.CapitalizeFirst());
             if (prop == null)
             {
                 throw new ArgumentException($"Property '{propertyName}' does not exist");
@@ -124,7 +124,7 @@ namespace AutoDealerV2.src.Services
                 throw new ArgumentException("Value cannot be null or empty", nameof(propertyName));
             }
 
-            PropertyInfo prop = typeof(Vehicle).GetProperty(propertyName.CapitalizeFirst());
+            PropertyInfo? prop = typeof(Vehicle).GetProperty(propertyName.CapitalizeFirst());
             if (prop == null)
             {
                 throw new ArgumentException($"Property '{propertyName}' does not exist");
@@ -132,7 +132,7 @@ namespace AutoDealerV2.src.Services
 
             return vehicles.Where(v =>
             {
-                object propValue = prop.GetValue(v);
+                object? propValue = prop.GetValue(v);
                 if (propValue == null)
                 {
                     return false;

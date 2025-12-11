@@ -13,7 +13,21 @@ namespace AutoDealerV2.src.Services.Serialisation
         {
             List<Vehicle>? list = new List<Vehicle>();
             string jsonString = File.ReadAllText(pathName);
-            list = JsonSerializer.Deserialize<List<Vehicle>>(jsonString);
+            try
+            {
+                if (jsonString.Length!=0)
+                {
+                    list = JsonSerializer.Deserialize<List<Vehicle>>(jsonString);
+                }
+                //else
+                //{
+                //    throw new Exception("The given file is empty");
+                //}
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             return list;
         }
        public void Save(List<Vehicle> vehicles, string pathName)

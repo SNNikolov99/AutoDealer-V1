@@ -45,7 +45,7 @@ namespace AutoDealerV2.src.Services.Serialisation
                 var fuel = parts[8].Trim();
 
 
-                Vehicle vehicle = null;
+                Vehicle? vehicle = null;
 
                 switch (type.ToLower())
                 {

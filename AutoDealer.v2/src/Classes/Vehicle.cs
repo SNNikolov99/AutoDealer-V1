@@ -51,9 +51,9 @@ namespace AutoDealerV2.src.Classes
         public abstract string GetVehicleType();
         public override string ToString()
         {
-            return  $" {Id.ToString()}, {Brand.ToString()} , {Model.ToString()} ," +
-                    $" {Year.ToString()} , {Price.ToString()} , {Color.ToString()}," +
-                    $" {HorsePower.ToString()}, {FuelType.ToString()}";
+            return  $" {Id},vehicle, {Brand} , {Model} ," +
+                    $" {Year} , {Price} , {Color}," +
+                    $" {HorsePower}, {FuelType}";
         }
     }
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 1,
+    "Brand": "mitsubishi",
+    "Model": "fuso",
+    "Year": 2014,
+    "Price": 34000,
+    "Color": "white",
+    "HorsePower": 190,
+    "FuelType": "diesel"
+  },
+  {
+    "Id": 2,
+    "Brand": "mercedes",
+    "Model": "s class",
+    "Year": 2014,
+    "Price": 65000,
+    "Color": "black",
+    "HorsePower": 511,
+    "FuelType": "gasoline"
+  }
+]

@@ -25,9 +25,9 @@ namespace AutoDealerV2.src.Classes
 
         public override string ToString()
         {
-            return $" {Id.ToString()}, minibus , {Brand.ToString()} , {Model.ToString()} ," +
-                    $" {Year.ToString()} , {Price.ToString()} , {Color.ToString()}," +
-                    $" {HorsePower.ToString()}, {FuelType.ToString()}";
+            return $" {Id}, minibus , {Brand} , {Model} ," +
+                    $" {Year} , {Price} , {Color}," +
+                    $" {HorsePower}, {FuelType}";
         }
 
     }
