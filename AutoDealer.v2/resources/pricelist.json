@@ -1,17 +1,18 @@
 {
     "Models": {
         "Golf 7": {
+            "Brand":  "Volkswagen",
             "Type": "Car",
             "BasePrice": 18000,
-            "DefaultEngine": "1.5 TSI 130hp",
+            "DefaultEngine": "1.5 TSI 130HP",
             "AvailableEngines": [
-                "1.5 TSI 130hp",
-                "1.5 TSI 150hp",
+                "1.5 TSI 130HP",
+                "1.5 TSI 150HP",
                 "2.0 TSI 190HP",
                 "2.0 TSI 230HP",
                 "2.0 TSI 280HP",
-                "2.0 TDI 150hp",
-                "2.0 TDI 185hp"
+                "2.0 TDI 150HP",
+                "2.0 TDI 185HP"
             ],
             "AvailableColors": [
                 "Pure White",
@@ -25,12 +26,13 @@
             ]
         },
         "Golf 7R": {
+            "Brand": "Volkswagen",
             "Type": "Car",
             "BasePrice": 32000,
-            "DefaultEngine": "2.0 TSI 280hp",
+            "DefaultEngine": "2.0 TSI 280HP",
             "AvailableEngines": [
-                "2.5 TSI 380hp",
-                "2.0 TSI 280hp"
+                "2.5 TSI 380HP",
+                "2.0 TSI 280HP"
             ],
             "AvailableColors": [
                 "Pure White",
@@ -46,17 +48,18 @@
             ]
         },
         "Tiguan 2": {
+            "Brand": "Volkswagen",
             "Type": "Car",
             "BasePrice": 25000,
-            "DefaultEngine": "1.5 TSI 150hp",
+            "DefaultEngine": "1.5 TSI 150HP",
             "AvailableEngines": [
-                "1.5 TSI 150hp",
-                "2.0 TDI 150hp",
-                "2.0 TDI 185hp",
-                "2.0 TSI 190hp",
-                "2.0 TSI 230hp",
-                "2.0 TSI 280hp",
-                "3.0 TDI 230hp"
+                "1.5 TSI 150HP",
+                "2.0 TDI 150HP",
+                "2.0 TDI 185HP",
+                "2.0 TSI 190HP",
+                "2.0 TSI 230HP",
+                "2.0 TSI 280HP",
+                "3.0 TDI 230HP"
             ],
             "AvailableColors": [
                 "Pure White",
@@ -73,15 +76,16 @@
             ]
         },
         "T-Roc": {
+            "Brand": "Volkswagen",
             "Type": "Car",
             "BasePrice": 21000,
-            "DefaultEngine": "1.5 TSI 150hp",
+            "DefaultEngine": "1.5 TSI 150HP",
             "AvailableEngines": [
-                "1.5 TSI 150hp",
-                "2.0 TDI 150hp",
-                "2.0 TDI 185hp",
-                "2.0 TSI 190hp",
-                "2.0 TSI 230hp"
+                "1.5 TSI 150HP",
+                "2.0 TDI 150HP",
+                "2.0 TDI 185HP",
+                "2.0 TSI 190HP",
+                "2.0 TSI 230HP"
             ],
             "AvailableColors": [
                 "Pure White",
@@ -99,13 +103,14 @@
             ]
         },
         "Polo 7": {
+            "Brand": "Volkswagen",
             "Type": "Car",
             "BasePrice": 17000,
-            "DefaultEngine": "1.5 TSI 130hp",
+            "DefaultEngine": "1.5 TSI 130HP",
             "AvailableEngines": [
-                "1.5 TSI 130hp",
-                "1.5 TSI 150hp",
-                "2.0 TSI 190hp"
+                "1.5 TSI 130HP",
+                "1.5 TSI 150HP",
+                "2.0 TSI 190HP"
             ],
             "AvailableColors": [
                 "Pure White",
@@ -122,15 +127,16 @@
             ]
         },
         "Passat 7": {
+            "Brand": "Volkswagen",
             "Type": "Car",
             "BasePrice": 27000,
-            "DefaultEngine": "2.0 TDI 150hp",
+            "DefaultEngine": "2.0 TDI 150HP",
             "AvailableEngines": [
-                "2.0 TDI 150hp",
-                "2.0 TDI 185hp",
-                "2.0 TSI 190hp",
-                "2.0 TSI 230hp",
-                "3.0 TDI 230hp"
+                "2.0 TDI 150HP",
+                "2.0 TDI 185HP",
+                "2.0 TSI 190HP",
+                "2.0 TSI 230HP",
+                "3.0 TDI 230HP"
             ],
             "AvailableColors": [
                 "Pure White",
@@ -147,13 +153,14 @@
             ]
         },
         "Transporter T7": {
+            "Brand": "Volkswagen",
             "Type": "Minibus",
             "BasePrice": 29000,
-            "DefaultEngine": "2.0 TDI 150hp",
+            "DefaultEngine": "2.0 TDI 150HP",
             "AvailableEngines": [
-                "2.0 TDI 150hp",
-                "2.0 TDI 185hp",
-                "3.0 TDI 230hp"
+                "2.0 TDI 150HP",
+                "2.0 TDI 185HP",
+                "3.0 TDI 230HP"
             ],
             "AvailableColors": [
                 "Candy White",
@@ -168,12 +175,13 @@
             ]
         },
         "Caddy": {
+            "Brand": "Volkswagen",
             "Type": "Minibus",
             "BasePrice": 22000,
-            "DefaultEngine": "2.0 TDI 150hp",
+            "DefaultEngine": "2.0 TDI 150HP",
             "AvailableEngines": [
-                "2.0 TDI 150hp",
-                "2.0 TDI 185hp"
+                "2.0 TDI 150HP",
+                "2.0 TDI 185HP"
             ],
             "AvailableColors": [
                 "Pure White",
@@ -187,7 +195,8 @@
                 "Passenger Pack"
             ]
         },
-        "Ducati Monster": {
+        "Monster": {
+            "Brand": "Ducati",
             "Type": "Motorbike",
             "BasePrice": 13000,
             "DefaultEngine": "937cc",
@@ -203,7 +212,8 @@
                 "Touring Pack"
             ]
         },
-        "Ducati Panigale V4": {
+        "Panigale V4": {
+            "Brand": "Ducati",
             "Type": "Motorbike",
             "BasePrice": 25000,
             "DefaultEngine": "1103cc",
@@ -219,7 +229,8 @@
                 "Touring Pack"
             ]
         },
-        "Ducati Scrambler 800": {
+        "Scrambler 800": {
+            "Brand": "Ducati",
             "Type": "Motorbike",
             "BasePrice": 10500,
             "DefaultEngine": "803cc",
@@ -238,60 +249,65 @@
         }
     },
     "Engines": {
-        "1.5 TSI 130hp": {
+        "1.5 TSI 130HP": {
             "Price": 0,
             "Horsepower": 130,
             "FuelType": "Petrol"
         },
-        "1.5 TSI 150hp": {
+        "1.5 TSI 150HP": {
             "Price": 1500,
             "Horsepower": 150,
             "FuelType": "Petrol"
         },
-        "2.0 TDI 150hp": {
+        "2.0 TDI 150HP": {
             "Price": 2000,
             "Horsepower": 150,
             "FuelType": "Diesel"
         },
-        "2.0 TDI 204hp": {
+        "2.0 TDI 204HP": {
             "Price": 3500,
             "Horsepower": 204,
             "FuelType": "Diesel"
         },
-        "2.0 TSI 190hp": {
+        "2.0 TSI 190HP": {
             "Price": 3800,
             "Horsepower": 190,
             "FuelType": "Petrol"
         },
-        "2.0 TSI 230hp": {
+        "2.0 TSI 230HP": {
             "Price": 5200,
             "Horsepower": 230,
             "FuelType": "Petrol"
         },
 
-        "2.0 TSI 280hp": {
+        "2.0 TSI 280HP": {
             "Price": 6800,
             "Horsepower": 280,
             "FuelType": "Petrol"
         },
-        "2.5 TSI 380hp": {
+        "2.5 TSI 380HP": {
             "Price": 10500,
             "Horsepower": 380,
             "FuelType": "Petrol"
         },
-        "2.0 TDI 185hp": {
+        "2.0 TDI 185HP": {
             "Price": 4500,
             "Horsepower": 185,
             "FuelType": "Diesel"
         },
 
-        "3.0 TDI 230hp": {
+        "3.0 TDI 230HP": {
             "Price": 7200,
             "Horsepower": 230,
             "FuelType": "Diesel"
         },
+        "3.0 TFSI 354HP": {
+            "Price": 9200,
+            "Horsepower": 354,
+            "FuelType": "Petrol"
+        },
 
-        "3.0 TDI 290hp": {
+        "3.0 TDI 290HP": {
             "Price": 8800,
             "Horsepower": 290,
             "FuelType": "Diesel"

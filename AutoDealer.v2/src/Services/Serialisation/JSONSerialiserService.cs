@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace AutoDealerV2.src.Services.Serialisation
 {
-    public class JSONSerialiserService: ISerializer
+    public class JSONSerialiserService: ISerializer<Task>
     {
-       public List<Vehicle> Load(string pathName) 
+       public T Load<T>(string pathName) 
         {
-            List<Vehicle>? list = new List<Vehicle>();
+            T? list;
             string jsonString = File.ReadAllText(pathName);
             try
             {
                 if (jsonString.Length!=0)
                 {
-                    list = JsonSerializer.Deserialize<List<Vehicle>>(jsonString);
+                    list = JsonSerializer.Deserialize<T>(jsonString);
                 }
-                //else
-                //{
-                //    throw new Exception("The given file is empty");
-                //}
+                else
+                {
+                    throw new Exception("The given file is empty");
+                }
             }
             catch (Exception ex)
             {

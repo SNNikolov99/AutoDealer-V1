@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace AutoDealerV2.src.Services.Serialisation
 {
-    public interface ISerializer
+    public interface ISerializer<T>
     {
-        List<Vehicle> Load(string pathName);
+        T Load<T>(string pathName);
         void Save(List<Vehicle> vehicles, string pathName);
 
     }
