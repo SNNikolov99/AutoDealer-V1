@@ -191,7 +191,6 @@ namespace AutoDealerV2
             table.AddColumn("[bold]Id[/]");
             table.AddColumn("Brand");
             table.AddColumn("Model");
-            table.AddColumn(new TableColumn("Year").RightAligned());
             table.AddColumn(new TableColumn("Price").RightAligned());
             table.AddColumn("Color");
             table.AddColumn(new TableColumn("HP").RightAligned());
@@ -206,11 +205,10 @@ namespace AutoDealerV2
                 v.Id.ToString(),
                 v.Brand,
                 v.Model,
-                v.Year.ToString(),
                 v.Price.ToString("N2"),
                 v.Colour,
-                v.HorsePower.ToString(),
-                v.FuelType,
+                v.Horsepower.ToString(),
+                v.Fueltype,
                 v.Description
             };
 
@@ -228,7 +226,6 @@ namespace AutoDealerV2
         {
             AnsiConsole.WriteLine("\n-------------- Sort registry ---------------");
 
-
             string property = AnsiConsole.Prompt(
              new SelectionPrompt<string>()
              .Title("Select a property to sort by")
@@ -236,11 +233,10 @@ namespace AutoDealerV2
              {
                     "Brand",
                     "Model",
-                    "Year",
                     "Price",
-                    "Color",
+                    "Colour",
                     "Horsepower",
-                    "Fuel type"
+                    "Fueltype"
              }));
 
             string descending = AnsiConsole.Prompt(
@@ -259,9 +255,6 @@ namespace AutoDealerV2
         static void FilterVehicles(AutoRegistryService registry)
         {
             AnsiConsole.WriteLine("\n------------ Filter vehicles ---------------");
-            // AnsiConsole.Write("Property to filter by (e.g., Brand, Year, Price): ");
-            // var prop = AnsiConsole.ReadLine().ToString().ToLower();
-
 
             string property = AnsiConsole.Prompt(
                new SelectionPrompt<string>()
@@ -270,9 +263,8 @@ namespace AutoDealerV2
                {
                     "Brand",
                     "Model",
-                    "Year",
                     "Price",
-                    "Color",
+                    "Colour",
                     "Horsepower",
                     "Fuel type"
                })).ToLower();
@@ -280,7 +272,7 @@ namespace AutoDealerV2
 
             FilterOperator op = FilterOperator.Contains;
 
-            if (property == "brand" || property == "model" || property == "color" || property == "fuel*type")
+            if (property == "brand" || property == "model" || property == "colour" || property == "fuel*type")
             {
                 op = AnsiConsole.Prompt(
                   new SelectionPrompt<FilterOperator>()
@@ -293,7 +285,7 @@ namespace AutoDealerV2
                   }));
 
             }
-            else if (property == "year" || property == "horsepower" || property == "price")
+            else if (property == "horsepower" || property == "price")
             {
                 op = AnsiConsole.Prompt(
                    new SelectionPrompt<FilterOperator>()

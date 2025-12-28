@@ -15,7 +15,7 @@ namespace AutoDealerV2.src.Decorators
         protected Vehicle _vehicle;
 
         public VehicleDecorator(Vehicle vehicle) : 
-            base(vehicle.Brand,  vehicle.Model,vehicle.Type, vehicle.Year,vehicle.Price,vehicle.Colour, vehicle.HorsePower, vehicle.FuelType,vehicle.Description)
+            base(vehicle.Brand,  vehicle.Model,vehicle.Type,vehicle.Price,vehicle.Colour, vehicle.Horsepower, vehicle.Fueltype,vehicle.Description)
         {
             _vehicle = vehicle;
         }

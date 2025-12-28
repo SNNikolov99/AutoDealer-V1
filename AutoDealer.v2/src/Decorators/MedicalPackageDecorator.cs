@@ -30,7 +30,7 @@ namespace AutoDealerV2.src.Decorators
             }
 
             _vehicle.Price += 25500;
-            _vehicle.HorsePower += 30;
+            _vehicle.Horsepower += 30;
             _vehicle.Colour = "white with red stripes";
             _vehicle.Description += " The vehicle contains a medical package conversion. It contains needed equipment for sustaining a person alive ";
         }

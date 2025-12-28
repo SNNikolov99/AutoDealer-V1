@@ -27,8 +27,8 @@ namespace AutoDealerV2.src.Classes
             vehicle.Type = pricelist.models[model].type.ToLower();
             vehicle.Price = pricelist.models[model].basePrice;
             vehicle.Colour = pricelist.models[model].defaultColour.ToLower();
-            vehicle.HorsePower = pricelist.engines[pricelist.models[model].defaultEngine].horsepower;
-            vehicle.FuelType = pricelist.engines[pricelist.models[model].defaultEngine].fuelType.ToLower();
+            vehicle.Horsepower = pricelist.engines[pricelist.models[model].defaultEngine].horsepower;
+            vehicle.Fueltype = pricelist.engines[pricelist.models[model].defaultEngine].fuelType.ToLower();
             vehicle.Description = $"{vehicle.Brand} {vehicle.Model} with standard features";
 
             return this;
@@ -58,15 +58,15 @@ namespace AutoDealerV2.src.Classes
                 throw new ArgumentException("Engine not found in pricelist.");
             }
 
-            vehicle.HorsePower = pricelist.engines[engine].horsepower;
-            vehicle.FuelType = pricelist.engines[engine].fuelType.ToLower();
+            vehicle.Horsepower = pricelist.engines[engine].horsepower;
+            vehicle.Fueltype = pricelist.engines[engine].fuelType.ToLower();
             vehicle.Price += pricelist.engines[engine].price;
 
             if (vehicle.Description.Contains("with standard features"))
             {
                 vehicle.Description = vehicle.Description.Replace("with standard features", "");
             }
-            vehicle.Description += $" equipped with {vehicle.FuelType} {engine} engine generating {vehicle.HorsePower} hp";
+            vehicle.Description += $" equipped with {vehicle.Fueltype} {engine} engine generating {vehicle.Horsepower} hp";
             return this;
         }
 
@@ -83,6 +83,16 @@ namespace AutoDealerV2.src.Classes
                 vehicle.Description = vehicle.Description.Replace("with standard features", "");
             }
             vehicle.Description += $" improved with " + pricelist.packages[package].description;
+
+            if (pricelist.packages[package].HorsepowerBoost != 0)
+            {
+                vehicle.Horsepower += pricelist.packages[package].HorsepowerBoost;
+            }
+
+            if(pricelist.packages[package].FuelTypeOverride != "No")
+            {
+                vehicle.Fueltype = pricelist.packages[package].FuelTypeOverride.ToLower();
+            }
 
             return this;
 

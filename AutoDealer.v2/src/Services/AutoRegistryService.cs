@@ -70,11 +70,10 @@ namespace AutoDealerV2.src.Services
 
             if (string.IsNullOrWhiteSpace(vehicle.Brand)
               || string.IsNullOrWhiteSpace(vehicle.Model)
-              || string.IsNullOrWhiteSpace(vehicle.FuelType)
+              || string.IsNullOrWhiteSpace(vehicle.Fueltype)
               || string.IsNullOrWhiteSpace(vehicle.Colour)
-              || vehicle?.HorsePower == null
-              || vehicle?.Price == null
-              || vehicle?.Year == null)
+              || vehicle?.Horsepower == null
+              || vehicle?.Price == null)
             {
                 throw new ArgumentException("One or more vehicle fields are missing or invalid");
             }

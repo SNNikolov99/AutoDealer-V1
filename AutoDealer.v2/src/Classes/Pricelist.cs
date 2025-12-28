@@ -108,19 +108,17 @@ namespace AutoDealerV2.src.Classes
         public decimal price { get; set; }
         [JsonPropertyName("Description")]
         public string description { get; set; }
-        public bool extraSpace { get; set; }
-        public bool reinforcedFloor { get; set; }
-        public bool LuggageRacks { get; set; }
-        public bool PerformanceMode { get; set; }
+        [JsonPropertyName("HorsepowerBoost")]
+        public int HorsepowerBoost { get; set; }
+        [JsonPropertyName("FuelTypeOverride")]
+        public string FuelTypeOverride { get; set; }
 
         public PackageSpec()
         {
             this.price = decimal.Zero;
             this.description = string.Empty;
-            this.extraSpace = false;
-            this.reinforcedFloor = false;
-            this.LuggageRacks = false;
-            this.PerformanceMode = false;
+            this.FuelTypeOverride = string.Empty;
+            this.HorsepowerBoost = 0;
         }
     }
 

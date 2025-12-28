@@ -38,7 +38,7 @@
                 "Pure White",
                 "Deep Black Pearl",
                 "Atlantic Blue",
-                "BRG",
+                "British racing green",
                 "Burgundy Red"
             ],
             "AvailablePackages": [
@@ -65,7 +65,7 @@
                 "Pure White",
                 "Reflex Silver",
                 "Deep Black Pearl",
-                "BRG",
+                "British racing green",
                 "Mild Yellow",
                 "Burgundy Red"
             ],
@@ -91,7 +91,7 @@
                 "Pure White",
                 "Reflex Silver",
                 "Deep Black Pearl",
-                "BRG",
+                "British racing green",
                 "Mild Yellow",
                 "Burgundy Red",
                 "Atlantic Blue"
@@ -116,7 +116,7 @@
                 "Pure White",
                 "Reflex Silver",
                 "Deep Black Pearl",
-                "BRG",
+                "British racing green",
                 "Mild Yellow",
                 "Burgundy Red"
             ],
@@ -143,7 +143,7 @@
                 "Reflex Silver",
                 "Deep Black Pearl",
                 "Atlantic Blue",
-                "BRG",
+                "British racing green",
                 "Burgundy Red"
             ],
             "AvailablePackages": [
@@ -165,7 +165,7 @@
             "AvailableColours": [
                 "Candy White",
                 "Indium Grey Metallic",
-                "BRG",
+                "British racing green",
                 "Mild Yellow",
                 "Burgundy Red"
             ],
@@ -186,7 +186,7 @@
             "AvailableColours": [
                 "Pure White",
                 "Indium Grey Metallic",
-                "BRG",
+                "British racing green",
                 "Mild Yellow",
                 "Burgundy Red"
             ],
@@ -337,52 +337,64 @@
         "Indium Grey Metallic": 430,
         "Ducati Red": 0,
         "Dark Stealth": 300,
-        "BRG": 700,
+        "British racing green": 700,
         "Mild Yellow": 550,
         "Burgundy Red": 800
     },
     "Packages": {
         "Comfort Pack": {
-            "Price": 1200,
-            "Description": "Heated seats dual-zone AC better infotainment"
+          "Price": 1200,
+          "HorsepowerBoost": 0,
+          "FuelTypeOverride": "No",
+          "Description": "Heated seats along with dual-zone AC and better infotainment"
         },
 
         "R-Line Pack": {
-            "Price": 2800,
-            "SportSuspension": true,
-            "ExteriorTrim": "R-Line Styling"
+          "Price": 4800,
+          "HorsepowerBoost": 0,
+          "FuelTypeOverride": "No",
+          "Description": "R-Line Styling with more agressive bumpers and a sporty suspension."
         },
 
         "Cargo Pack": {
-            "Price": 1500,
-            "ExtraSpace": true,
-            "ReinforcedFloor": true
+          "Price": 5500,
+          "HorsepowerBoost": 0,
+          "FuelTypeOverride": "No",
+          "Description": "Elongated frame wtih increased cargo space along reinforced flooring and tie-down points."
         },
 
         "Passenger Pack": {
-            "Price": 2000,
-            "SeatConfig": "7-seater",
-            "InteriorTrim": "Comfort"
+          "Price": 4000,
+          "HorsepowerBoost": 0,
+          "FuelTypeOverride": "No",
+          "Description": "7 seats inside."
         },
 
         "Touring Pack": {
-            "Price": 900,
-            "LuggageRacks": true
+          "Price": 900,
+          "HorsepowerBoost": 0,
+          "FuelTypeOverride": "No",
+          "Description": "Enhanced comfort for long rides including roof luggage rack."
+
         },
 
         "Sport Pack": {
-            "Price": 1300,
-            "PerformanceMode": true
+          "Price": 1300,
+          "HorsepowerBoost": 20,
+          "FuelTypeOverride": "No",
+          "Description": "Performance exhaust and sport-tuned suspension for improved handling and sound."
         },
         "Mild Hybrid Pack": {
-            "Price": 3200,
-            "HorsepowerBoost": 80,
-            "FuelTypeOverride": "Hybrid"
+          "Price": 6200,
+          "HorsepowerBoost": 80,
+          "FuelTypeOverride": "Hybrid",
+          "Description": "Incorporates a 48V mild-hybrid system to improve fuel efficiency and provide a power boost."
         },
         "Performance Hybrid Pack": {
-            "Price": 7500,
-            "HorsepowerBoost": 120,
-            "FuelTypeOverride": "Hybrid"
+          "Price": 10500,
+          "HorsepowerBoost": 120,
+          "FuelTypeOverride": "Hybrid",
+          "Description": "Advanced hybrid system combining a powerful electric motor with the combustion engine for enhanced performance and efficiency."
         }
 
     }

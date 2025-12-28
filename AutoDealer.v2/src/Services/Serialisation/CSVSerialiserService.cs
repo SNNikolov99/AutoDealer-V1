@@ -30,7 +30,7 @@ namespace AutoDealerV2.src.Services.Serialisation
                 }
 
                 string[] parts = line.Split(',');
-                if (parts.Length != 10)
+                if (parts.Length != 9)
                 {
                     throw new ArgumentException($"There is an emptry field in this row {row}");
                 }
@@ -38,15 +38,14 @@ namespace AutoDealerV2.src.Services.Serialisation
                 var type = parts[1].Trim();
                 var brand = parts[2].Trim();
                 var model = parts[3].Trim();
-                var year = int.Parse(parts[4]);
-                var price = decimal.Parse(parts[5]);
-                var colour = parts[6].Trim();
-                var hp = int.Parse(parts[7]);
-                var fuel = parts[8].Trim();
-                var description = parts[9];
+                var price = decimal.Parse(parts[4]);
+                var colour = parts[5].Trim();
+                var hp = int.Parse(parts[6]);
+                var fuel = parts[7].Trim();
+                var description = parts[8];
 
 
-                Vehicle vehicle = new Vehicle(Id,brand,model,type,year,price,colour,hp,fuel,description);
+                Vehicle vehicle = new Vehicle(Id,brand,model,type,price,colour,hp,fuel,description);
 
 
                 if (vehicle != null)
