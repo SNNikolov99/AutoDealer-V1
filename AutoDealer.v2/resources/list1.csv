@@ -1,16 +1,5 @@
- 1, car, ford , focus , 2019 , 20000 , red, 150, gasoline
- 2, car, mercedes , vito , 2020 , 35000 , white, 120, diesel
- 3 ,motorbike ,ducati,monster , 2021,16000,black, 110, gasoline
- 4, car, tesla , model 3 , 2021 , 45000 , blue, 283, electric
- 5, minibus , volkswagen , transporter , 2018 , 30000 , silver, 130, diesel
- 6, car, toyota , corolla , 2017 , 18000 , gray, 132, gasoline
- 7 ,motorbike ,yamaha,mt-07 , 2018,7500,matte black, 74, gasoline
- 8, minibus , renault , trafic , 2019 , 28000 , white, 115, diesel
- 9, car, honda , civic , 2022 , 22000 , blue, 158, gasoline
- 10 ,motorbike ,kawasaki,ninja zx-6r , 2020,12000,green, 128, gasoline
- 11, car, bmw , 3 series , 2020 , 35000 , black, 255, gasoline
- 12, minibus , fiat , ducato , 2021 , 33000 , white, 140, diesel
- 13 ,motorbike ,harley-davidson,street 750 , 2019,8000,black, 58, gasoline
- 14, car, chevrolet , impala , 2016 , 17000 , red, 305, gasoline
- 17, car, mercedes , s class , 2017 , 100000 , black, 561, gasoline+ hybrid
- 18 ,motorbike ,yamaha,r6 , 2004,5000,red, 126, gasoline
+ 6, minibus , volkswagen , transporter t7 , 0 , 35430 , indium grey metallic, 185, diesel ,     volkswagen transporter t7  equipped with diesel 2.0 tdi 185hp engine generating 185 hp in indium grey metallic color improved with 
+ 7, motorbike , ducati , panigale v4 , 0 , 30800 , ducati red, 210, petrol ,   ducati panigale v4  equipped with petrol 1103cc engine generating 210 hp in ducati red color improved with 
+ 8, car , volkswagen , golf 7r , 0 , 47000 , brg, 280, petrol ,   volkswagen golf 7r  equipped with petrol 2.0 tsi 280hp engine generating 280 hp in brg color improved with 
+ 9, Car , Volkswagen , Tiguan 2 , 0 , 31200 , Deep Black Pearl, 185, Diesel , Volkswagen Tiguan 2  equipped with Diesel 2.0 TDI 185HP engine generating 185 hp in Deep Black Pearl color improved with Heated seats dual-zone AC better infotainment
+ 10, Minibus , Volkswagen , Transporter T7 , 0 , 39000 , Burgundy Red, 230, Diesel , Volkswagen Transporter T7  equipped with Diesel 3.0 TDI 230HP engine generating 230 hp in Burgundy Red color improved with 

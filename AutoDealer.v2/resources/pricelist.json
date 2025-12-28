@@ -14,7 +14,7 @@
                 "2.0 TDI 150HP",
                 "2.0 TDI 185HP"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Pure White",
                 "Deep Black Pearl",
                 "Atlantic Blue"
@@ -34,7 +34,7 @@
                 "2.5 TSI 380HP",
                 "2.0 TSI 280HP"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Pure White",
                 "Deep Black Pearl",
                 "Atlantic Blue",
@@ -61,7 +61,7 @@
                 "2.0 TSI 280HP",
                 "3.0 TDI 230HP"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Pure White",
                 "Reflex Silver",
                 "Deep Black Pearl",
@@ -87,7 +87,7 @@
                 "2.0 TSI 190HP",
                 "2.0 TSI 230HP"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Pure White",
                 "Reflex Silver",
                 "Deep Black Pearl",
@@ -112,7 +112,7 @@
                 "1.5 TSI 150HP",
                 "2.0 TSI 190HP"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Pure White",
                 "Reflex Silver",
                 "Deep Black Pearl",
@@ -138,7 +138,7 @@
                 "2.0 TSI 230HP",
                 "3.0 TDI 230HP"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Pure White",
                 "Reflex Silver",
                 "Deep Black Pearl",
@@ -162,7 +162,7 @@
                 "2.0 TDI 185HP",
                 "3.0 TDI 230HP"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Candy White",
                 "Indium Grey Metallic",
                 "BRG",
@@ -183,7 +183,7 @@
                 "2.0 TDI 150HP",
                 "2.0 TDI 185HP"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Pure White",
                 "Indium Grey Metallic",
                 "BRG",
@@ -203,7 +203,7 @@
             "AvailableEngines": [
                 "937cc"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Ducati Red",
                 "Dark Stealth"
             ],
@@ -220,7 +220,7 @@
             "AvailableEngines": [
                 "1103cc"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Ducati Red",
                 "Dark Stealth"
             ],
@@ -237,7 +237,7 @@
             "AvailableEngines": [
                 "803cc"
             ],
-            "AvailableColors": [
+            "AvailableColours": [
                 "Ducati Red",
                 "Dark Stealth",
                 "Mild Yellow"
@@ -328,7 +328,7 @@
             "FuelType": "Petrol"
         }
     },
-    "Colors": {
+    "Colours": {
         "Pure White": 0,
         "Deep Black Pearl": 500,
         "Atlantic Blue": 650,
@@ -344,7 +344,7 @@
     "Packages": {
         "Comfort Pack": {
             "Price": 1200,
-            "Description": "Heated seats, dual-zone AC, better infotainment"
+            "Description": "Heated seats dual-zone AC better infotainment"
         },
 
         "R-Line Pack": {

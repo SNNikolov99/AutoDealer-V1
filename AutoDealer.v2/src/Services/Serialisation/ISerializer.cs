@@ -9,8 +9,8 @@ namespace AutoDealerV2.src.Services.Serialisation
 {
     public interface ISerializer<T>
     {
-        T Load<T>(string pathName);
-        void Save(List<Vehicle> vehicles, string pathName);
+        T Load(string pathName);
+        void Save(T vehicles, string pathName);
 
     }
 }

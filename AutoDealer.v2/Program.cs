@@ -1,9 +1,6 @@
 ﻿using AutoDealerV2.src.Classes;
 using AutoDealerV2.src.Services;
 using AutoDealerV2.src.Decorators;
-using AutoDealerV2.src.Decorators.CarDecorators;
-using AutoDealerV2.src.Decorators.MotorbikeDecorators;
-using AutoDealerV2.src.Decorators.MinibusDecorators;
 using Microsoft.Win32;
 using Spectre;
 using Spectre.Console;
@@ -24,19 +21,24 @@ namespace AutoDealerV2
 
             //if (args.Length == 0)
             //{
-            //    Console.WriteLine("Usage: AutoRegistry <path-to-file>");
+            //    AnsiConsole.WriteLine("Usage: AutoRegistry <path-to-file>");
             //    return;
             //}
 
-           // string filePath = args[0];
+            // string filePath = args[0];
 
-            SerialisationService serialisationService = new SerialisationService("C:\\Users\\Simeon\\source\\repos\\SNNikolov99\\AutoDealer\\AutoDealer.v2\\resources\\list1.csv");
+            SerialisationService<List<Vehicle>> serialisationService = new SerialisationService<List<Vehicle>>("C:\\Users\\Simeon\\Desktop\\Projects\\C#\\AutoDealer\\AutoDealer.v2\\resources\\list1.csv");
+            SerialisationService<Pricelist> PriceListSerialisation = new SerialisationService<Pricelist>("C:\\Users\\Simeon\\Desktop\\Projects\\C#\\AutoDealer\\AutoDealer.v2\\resources\\pricelist.json");
             AutoRegistryService registry = new AutoRegistryService(serialisationService.Load());
-            ShowMainConsole(registry,serialisationService);
 
+
+            Pricelist? pricelist = PriceListSerialisation.Load();
+
+
+            ShowMainConsole(registry, serialisationService, pricelist);
         }
 
-        static void ShowMainConsole(AutoRegistryService registry, SerialisationService serialisationService)
+        static void ShowMainConsole(AutoRegistryService registry, SerialisationService<List<Vehicle>> serialisationService, Pricelist pricelist)
         {
             bool exit = false;
 
@@ -68,8 +70,8 @@ namespace AutoDealerV2
                             bool addAnother = true;
                             while (addAnother)
                             {
-                                AddVehicle(registry);
-                                Console.WriteLine("Would you like to add another? (Yes , no)");
+                                AddVehicle(registry, pricelist);
+                                AnsiConsole.WriteLine("Would you like to add another? (Yes , no)");
                                 if (Console.ReadLine().ToLower() == "no")
                                 {
                                     addAnother = false;
@@ -82,32 +84,32 @@ namespace AutoDealerV2
                             break;
                         case "List Vehicles":
                             RenderVehicles(registry.Vehicles);
-                            Console.WriteLine("\nTo return to the main console, press any key ...");
+                            AnsiConsole.WriteLine("\nTo return to the main AnsiConsole, press any key ...");
                             Console.ReadKey(true);
                             break;
                         case "Sort Vehicles":
                             SortVehicles(registry);
-                            Console.WriteLine("\nTo return to the main console, press any key ...");
+                            AnsiConsole.WriteLine("\nTo return to the main AnsiConsole, press any key ...");
                             Console.ReadKey(true);
                             break;
                         case "Filter Vehicles":
                             FilterVehicles(registry);
-                            Console.WriteLine("\nTo return to the main console, press any key ...");
+                            AnsiConsole.WriteLine("\nTo return to the main AnsiConsole, press any key ...");
                             Console.ReadKey(true);
                             break;
                         case "Remove Vehicle":
                             RemoveVehicle(registry);
-                            Console.WriteLine("\nTo return to the main console, press any key ...");
+                            AnsiConsole.WriteLine("\nTo return to the main AnsiConsole, press any key ...");
                             Console.ReadKey(true);
                             break;
                         case "Get total sum":
                             GetTotalSum(registry);
-                            Console.WriteLine("\nTo return to the main console, press any key ...");
+                            AnsiConsole.WriteLine("\nTo return to the main AnsiConsole, press any key ...");
                             Console.ReadKey(true);
                             break;
                         case "Modify vehicle by ID":
-                            //ModifyExistingVehicle(registry);
-                            Console.WriteLine("\nTo return to the main console, press any key ...");
+                            ModifyExistingVehicle(registry);
+                            AnsiConsole.WriteLine("\nTo return to the main AnsiConsole, press any key ...");
                             Console.ReadKey(true);
                             break;
                         case "Save & Exit":
@@ -115,73 +117,70 @@ namespace AutoDealerV2
                             exit = true;
                             break;
                         default:
-                            Console.WriteLine("Invalid option. Please try again.");
+                            AnsiConsole.WriteLine("Invalid option. Please try again.");
                             break;
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error: {ex.Message}");
-                    Console.WriteLine("\nTo return to the main console, press any key ...");
+                    AnsiConsole.WriteLine($"Error: {ex.Message}");
+                    AnsiConsole.WriteLine("\nTo return to the main AnsiConsole, press any key ...");
                     Console.ReadKey(true);
                 }
             }
 
-            Console.WriteLine("Goodbye!");
+            AnsiConsole.WriteLine("Goodbye!");
         }
 
 
 
-        static void AddVehicle(AutoRegistryService registry)
+        static void AddVehicle(AutoRegistryService registry, Pricelist pricelist)
         {
-            Console.WriteLine("\n---------------- Add vehicle ----------------------");
-            Console.WriteLine("Select vehicle type: 1. Car  2. MiniBus  3. Motorbike");
-            Console.Write("Choice: ");
-            var typeChoice = Console.ReadLine();
+            VehicleBuilder builder = new VehicleBuilder(pricelist);
 
-            Console.Write("Brand: ");
-            var brand = Console.ReadLine();
-            Console.Write("Model: ");
-            var model = Console.ReadLine();
-            Console.Write("Year: ");
-            var year = int.Parse(Console.ReadLine() ?? "0");
-            Console.Write("Price: ");
-            var price = decimal.Parse(Console.ReadLine() ?? "0");
-            Console.Write("Color: ");
-            var color = Console.ReadLine();
-            Console.Write("HorsePower: ");
-            var hp = int.Parse(Console.ReadLine() ?? "0");
-            Console.Write("FuelType: ");
-            var fuel = Console.ReadLine();
+            AnsiConsole.Clear();
+            AnsiConsole.WriteLine("\n---------------- Add vehicle ----------------------");
+            AnsiConsole.WriteLine("Select a vehicle from the given list ");
 
-            Vehicle vehicle;
-            switch (typeChoice)
-            {
-                case "1":
-                    vehicle = new Car(brand!, model!, year, price, color!, hp, fuel!);
-                    break;
-                case "2":
-                    vehicle = new MiniBus(brand!, model!, year, price, color!, hp, fuel!);
-                    break;
-                case "3":
-                    vehicle = new Motorbike(brand!, model!, year, price, color!, hp, fuel!);
-                    break;
-                default:
-                    Console.WriteLine("Unknown type, defaulting to Car.");
-                    vehicle = new Car(brand!, model!, year, price, color!, hp, fuel!);
-                    break;
-            }
+            string modelChoice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("\"\\n========================= Avaliable Models ==========================\"").
+                AddChoices(pricelist.models.Keys.ToArray()));
+
+            string engineChoice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("\"\\n========================= Avaliable Engines ==========================\"")
+                .AddChoices(pricelist.models[modelChoice].avaliableEngines));
+
+            string colourChoice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("\"\\n========================= Avaliable Colours ==========================\"")
+                .AddChoices(pricelist.models[modelChoice].avaliableColours));
+
+            string enginePackages = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("\"\\n========================= Avaliable Packages ==========================\"")
+                .AddChoices(pricelist.models[modelChoice].avaliablePackages));
+
+
+            Vehicle vehicle = builder.
+                 setModel(modelChoice)
+                .setEngine(engineChoice)
+                .setColor(colourChoice)
+                .setPackage(enginePackages)
+                .Build();
+
 
             registry.AddVehicle(vehicle);
-            Console.WriteLine($"Vehicle added with ID: {vehicle.Id}");
+            AnsiConsole.WriteLine($"Vehicle added with ID: {vehicle.Id}");
         }
 
 
 
-        //Using Spectre console
+        //Using Spectre AnsiConsole
         static void RenderVehicles(List<Vehicle> vehicles)
         {
-            //Console.OutputEncoding = System.Text.Encoding.UTF8;
+            //AnsiConsole.OutputEncoding = System.Text.Encoding.UTF8;
 
             var table = new Table()
                 .Border(TableBorder.Rounded)
@@ -197,6 +196,7 @@ namespace AutoDealerV2
             table.AddColumn("Color");
             table.AddColumn(new TableColumn("HP").RightAligned());
             table.AddColumn("Fuel");
+            table.AddColumn("Description");
 
             var i = 0;
             foreach (var v in vehicles)
@@ -208,9 +208,10 @@ namespace AutoDealerV2
                 v.Model,
                 v.Year.ToString(),
                 v.Price.ToString("N2"),
-                v.Color,
+                v.Colour,
                 v.HorsePower.ToString(),
-                v.FuelType
+                v.FuelType,
+                v.Description
             };
 
                 // zebra striping
@@ -225,7 +226,7 @@ namespace AutoDealerV2
 
         static void SortVehicles(AutoRegistryService registry)
         {
-            Console.WriteLine("\n-------------- Sort registry ---------------");
+            AnsiConsole.WriteLine("\n-------------- Sort registry ---------------");
 
 
             string property = AnsiConsole.Prompt(
@@ -257,9 +258,9 @@ namespace AutoDealerV2
 
         static void FilterVehicles(AutoRegistryService registry)
         {
-            Console.WriteLine("\n------------ Filter vehicles ---------------");
-            // Console.Write("Property to filter by (e.g., Brand, Year, Price): ");
-            // var prop = Console.ReadLine().ToString().ToLower();
+            AnsiConsole.WriteLine("\n------------ Filter vehicles ---------------");
+            // AnsiConsole.Write("Property to filter by (e.g., Brand, Year, Price): ");
+            // var prop = AnsiConsole.ReadLine().ToString().ToLower();
 
 
             string property = AnsiConsole.Prompt(
@@ -312,7 +313,7 @@ namespace AutoDealerV2
             }
 
 
-            Console.Write("Value: ");
+            AnsiConsole.Write("Value: ");
             var value = Console.ReadLine();
             var filtered = registry.FilterByProperty(property, value, op);
 
@@ -321,86 +322,66 @@ namespace AutoDealerV2
 
         static void RemoveVehicle(AutoRegistryService registry)
         {
-            Console.WriteLine("\n------------ Remove Vehicle ---------------");
-            Console.Write("Enter vehicle ID to remove: ");
+            AnsiConsole.WriteLine("\n------------ Remove Vehicle ---------------");
+            AnsiConsole.Write("Enter vehicle ID to remove: ");
             var id = int.Parse(Console.ReadLine() ?? "0");
             registry.RemoveVehicleByID(id);
-            Console.WriteLine($"Vehicle with ID {id} removed.");
+            AnsiConsole.WriteLine($"Vehicle with ID {id} removed.");
         }
 
         static void GetTotalSum(AutoRegistryService registry)
         {
-            Console.Clear();
-            Console.WriteLine("\n--------- Total sum ---------------");
+            AnsiConsole.Clear();
+            AnsiConsole.WriteLine("\n--------- Total sum ---------------");
             decimal res = registry.GetInventoryTotalAmount();
-            Console.WriteLine("Total amount of inventory in stock in leva is: " + res.ToString());
+            AnsiConsole.WriteLine("Total amount of inventory in stock in leva is: " + res.ToString());
         }
 
         static void ModifyExistingVehicle(AutoRegistryService registry)
         {
-            Console.Clear();
-            Console.WriteLine("\n--------- Modify existing vehicle ---------------");
+            AnsiConsole.Clear();
+            AnsiConsole.WriteLine("\n--------- Modify existing vehicle ---------------");
 
-            Console.WriteLine("Enter a ID which you want to modify.(0,1,2,3, etc )");
-            int ID = Convert.ToInt32(Console.ReadLine());
+            // Corrected the SelectionPrompt to use string instead of Vehicle
+            string IDChoice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Select a vehicle to modify:")
+                .AddChoices(registry.Vehicles.Select(v => $"{v.Id}: {v.Brand} {v.Model}").ToArray()));
 
-            //IDs start from 1, not 0
-            if (ID > registry.Vehicles.Count + 1 || ID <= 0)
+            // Extract the ID from the selected string
+            int ID = int.Parse(IDChoice.Split(':')[0]);
+
+            string choice = AnsiConsole.Prompt(
+                 new SelectionPrompt<string>()
+                 .Title("What special package should be added:")
+                 .AddChoices(new string[]
+                 {
+                     "Medical Package",
+                     "Police Package",
+                     "Utility Package",
+                 }));
+
+            switch (choice)
             {
-                throw new ArgumentException("The list does not contain such ID");
+                case "Medical Package":
+                    MedicalPackageDecorator medicalPackage = new MedicalPackageDecorator(registry.Vehicles.First(v => v.Id == ID));
+                    medicalPackage.AttachPackage();
+                    break;
+                case "Police Package":
+                    PolicePackageDecorator policePackage = new PolicePackageDecorator(registry.Vehicles.First(v => v.Id == ID));
+                    policePackage.AttachPackage();
+                    break;
+                case "Utility Package":
+                    UtilityPackageDecorator utilityPackage = new UtilityPackageDecorator(registry.Vehicles.First(v => v.Id == ID));
+                    utilityPackage.AttachPackage();
+                    break;
+                default:
+                    AnsiConsole.WriteLine("Invalid option. Please try again.");
+                    break;
             }
 
-
-            switch (registry.Vehicles[ID].GetVehicleType().ToLower())
-            {
-                case "car":
-                    Console.WriteLine("Would you like a V6 TDI engine? ( Yes,no ):");
-                    if (Console.ReadLine().ToLower() == "yes")
-                    {
-                        var v6 = new V6TDIEngine((Car)registry.Vehicles[ID]);
-                        v6.AttachPart();
-
-                    }
-                    Console.WriteLine("Would you hybrid traction? ( Yes,no ):");
-                    if (Console.ReadLine().ToLower() == "yes")
-                    {
-                        var hybrid = new HybridTraction((Car)registry.Vehicles[ID]);
-                        hybrid.AttachPart();
-                    }
-                    break;
-                case "motorbike":
-                    Console.WriteLine("Would you like a 750cc engine? ( Yes,no ):");
-                    if (Console.ReadLine().ToLower() == "yes")
-                    {
-                        var supermoto = new _750ccEngine((Motorbike)registry.Vehicles[ID]);
-                        supermoto.AttachPart();
-
-                    }
-                    break;
-                case "minibus":
-                    Console.WriteLine("Would you like the Minibus to be long based? ( Yes,no ):");
-                    if (Console.ReadLine().ToLower() == "yes")
-                    {
-                        var longBase = new LongBase((MiniBus)registry.Vehicles[ID]);
-                        longBase.AttachPart();
-
-                    }
-                    break;
-
-
-            }
-
-            Console.WriteLine("Would you like a nice color? ( Yes,no ):");
-            if (Console.ReadLine().ToLower() == "yes")
-            {
-                var newColor = new DesignerColorDecocrator(registry.Vehicles[ID]);
-                newColor.AttachPart();
-            }
+            AnsiConsole.WriteLine("Vehicle modified successfully.");
         }
-
-
-       
-
     }
 
 }

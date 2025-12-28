@@ -15,14 +15,14 @@ namespace AutoDealerV2.src.Decorators
         protected Vehicle _vehicle;
 
         public VehicleDecorator(Vehicle vehicle) : 
-            base(vehicle.Brand,  vehicle.Model, vehicle.Year, vehicle.Price,vehicle.Color, vehicle.HorsePower, vehicle.FuelType)
+            base(vehicle.Brand,  vehicle.Model,vehicle.Type, vehicle.Year,vehicle.Price,vehicle.Colour, vehicle.HorsePower, vehicle.FuelType,vehicle.Description)
         {
             _vehicle = vehicle;
         }
 
         public abstract void AttachPackage();
 
-        public override string GetVehicleType() => _vehicle.GetVehicleType();
+        
         
     }
 }

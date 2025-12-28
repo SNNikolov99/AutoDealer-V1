@@ -8,9 +8,9 @@ namespace AutoDealerV2.src.Classes
 {
     public interface IBuilder
     {
-        public void setModel(string model);
-        public void setColor(string color);
-        public void setEngine();
-        public void setPackage();
+        public IBuilder setModel(string model);
+        public IBuilder setColor(string color);
+        public IBuilder setEngine(string engine);
+        public IBuilder setPackage(string package);
     }
 }

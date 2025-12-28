@@ -7,7 +7,7 @@ using AutoDealerV2.src.Classes;
 
 namespace AutoDealerV2.src.Services.Serialisation
 {
-    public class CSVSerialiserService : ISerializer
+    public class CSVSerialiserService: ISerializer<List<Vehicle>>
     {
         public List<Vehicle> Load(string filename)
         {
@@ -30,7 +30,7 @@ namespace AutoDealerV2.src.Services.Serialisation
                 }
 
                 string[] parts = line.Split(',');
-                if (parts.Length != 9)
+                if (parts.Length != 10)
                 {
                     throw new ArgumentException($"There is an emptry field in this row {row}");
                 }
@@ -40,29 +40,14 @@ namespace AutoDealerV2.src.Services.Serialisation
                 var model = parts[3].Trim();
                 var year = int.Parse(parts[4]);
                 var price = decimal.Parse(parts[5]);
-                var color = parts[6].Trim();
+                var colour = parts[6].Trim();
                 var hp = int.Parse(parts[7]);
                 var fuel = parts[8].Trim();
+                var description = parts[9];
 
 
-                Vehicle? vehicle = null;
+                Vehicle vehicle = new Vehicle(Id,brand,model,type,year,price,colour,hp,fuel,description);
 
-                switch (type.ToLower())
-                {
-                    case "car":
-                        vehicle = new Car(Id,brand, model, year, price, color, hp, fuel);
-                        break;
-                    case "minibus":
-                        vehicle = new MiniBus(Id,brand, model, year, price, color, hp, fuel);
-                        break;
-                    case "motorbike":
-                        vehicle = new Motorbike(Id,brand, model, year, price, color, hp, fuel);
-                        break;
-                    default:
-                        throw new ArgumentException("such type doesn`t exist");
-
-
-                }
 
                 if (vehicle != null)
                 {
@@ -75,9 +60,9 @@ namespace AutoDealerV2.src.Services.Serialisation
 
       
 
-        public void Save(List<Vehicle> list,string pathName)
+        public void Save(List<Vehicle> data,string pathName)
         {
-            var lines = list.Select(v => v.ToString());
+            var lines = data.Select(v => v.ToString());
 
             File.WriteAllLines(pathName, lines);
 

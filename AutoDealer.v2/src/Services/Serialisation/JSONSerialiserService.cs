@@ -7,30 +7,25 @@ using System.Threading.Tasks;
 
 namespace AutoDealerV2.src.Services.Serialisation
 {
-    public class JSONSerialiserService: ISerializer<Task>
+    public class JSONSerialiserService<T>: ISerializer<T>
     {
-       public T Load<T>(string pathName) 
+       public T Load(string pathName) 
         {
-            T? list;
             string jsonString = File.ReadAllText(pathName);
-            try
+            var options = new JsonSerializerOptions
             {
-                if (jsonString.Length!=0)
-                {
-                    list = JsonSerializer.Deserialize<T>(jsonString);
-                }
-                else
-                {
-                    throw new Exception("The given file is empty");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return list;
+                PropertyNameCaseInsensitive = true
+            };
+
+            if (string.IsNullOrWhiteSpace(jsonString))
+                throw new InvalidOperationException("The given file is empty");
+
+            var result = JsonSerializer.Deserialize<T>(jsonString,options);
+
+            return result ?? throw new InvalidOperationException("Deserialization returned null");
+
         }
-       public void Save(List<Vehicle> vehicles, string pathName)
+       public void Save(T vehicles, string pathName)
        {
             string JsonString = JsonSerializer.Serialize(vehicles,
                 new JsonSerializerOptions {WriteIndented = true });

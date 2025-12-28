@@ -71,7 +71,7 @@ namespace AutoDealerV2.src.Services
             if (string.IsNullOrWhiteSpace(vehicle.Brand)
               || string.IsNullOrWhiteSpace(vehicle.Model)
               || string.IsNullOrWhiteSpace(vehicle.FuelType)
-              || string.IsNullOrWhiteSpace(vehicle.Color)
+              || string.IsNullOrWhiteSpace(vehicle.Colour)
               || vehicle?.HorsePower == null
               || vehicle?.Price == null
               || vehicle?.Year == null)

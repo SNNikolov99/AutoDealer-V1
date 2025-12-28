@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="src\Classes\Car.cs" />
+    <Compile Remove="src\Classes\IBuilder.cs" />
+    <Compile Remove="src\Classes\MiniBus.cs" />
+    <Compile Remove="src\Classes\Motorbike.cs" />
     <Compile Remove="src\Decorators\DesignerColorDecocrator.cs" />
   </ItemGroup>
 

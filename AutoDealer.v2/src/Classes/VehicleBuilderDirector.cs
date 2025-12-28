@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace AutoDealerV2.src.Classes
 {
-    internal class VehicleBuilderDirector
+    public class VehicleBuilderDirector
     {
+        private VehicleBuilder builder;
+        public VehicleBuilderDirector(VehicleBuilder builder)
+        {
+            this.builder = builder;
+        }
+      
+        public Vehicle constructBaseVehicle(string model)
+        {
+            builder.Reset();
+            builder.setModel(model);
+            return builder.Build();
+        }
     }
 }

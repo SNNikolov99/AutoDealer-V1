@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AutoDealerV2.src.Classes
@@ -9,25 +10,42 @@ namespace AutoDealerV2.src.Classes
     public class ModelSpec
     {
         //string name;
-        string brand;
-        string type;
-        decimal basePrice;
-        string defaultEngine;
-        string defaultColor;
-        string defaultPackage;
-        List<string> avaliableEngines;
-        List<string> avaliableColors;
-        List<string> avaliablePackages;
+        [JsonPropertyName("Brand")]
+        public string brand { get; set; } 
+
+        [JsonPropertyName("Type")]
+        public string type { get; set; } 
+
+        [JsonPropertyName("BasePrice")]
+        public decimal basePrice { get; set; }
+
+        [JsonPropertyName("DefaultEngine")]
+        public string defaultEngine { get; set; } 
+
+        [JsonPropertyName("DefaultColour")] 
+        public string defaultColour { get; set; } 
+
+        [JsonPropertyName("DefaultPackage")]
+        public string defaultPackage { get; set; } 
+
+        [JsonPropertyName("AvailableEngines")]
+        public List<string> avaliableEngines { get; set; } 
+
+        [JsonPropertyName("AvailableColours")] 
+        public List<string> avaliableColours { get; set; } 
+
+        [JsonPropertyName("AvailablePackages")]
+        public List<string> avaliablePackages { get; set; } 
 
         public ModelSpec() {
             brand = "";
             type = "";
             basePrice = 00;
             defaultEngine = "";
-            defaultColor = "";
+            defaultColour = "";
             defaultPackage = "";
             avaliableEngines = new List<string>();
-            avaliableColors = new List<string>();
+            avaliableColours = new List<string>();
             avaliablePackages = new List<string>();
         }
 
@@ -46,9 +64,9 @@ namespace AutoDealerV2.src.Classes
             this.type = type;
             this.basePrice = basePrice;
             this.defaultEngine = defaultEngine;
-            this.defaultColor = defaultColor;
+            this.defaultColour = defaultColor;
             this.defaultPackage = defaultPackage;
-            this.avaliableColors = avaliableColors;
+            this.avaliableColours = avaliableColors;
             this.avaliablePackages = avaliablePackages;
             this.avaliableEngines = avaliableEngines;
         }
@@ -59,9 +77,12 @@ namespace AutoDealerV2.src.Classes
     public class EngineSpec
     {
         //string name;
-        decimal price;
-        int horsepower;
-        string fuelType;
+        [JsonPropertyName("Price")]
+        public decimal price { get; set; }
+        [JsonPropertyName("Horsepower")]
+        public int horsepower { get; set; }
+        [JsonPropertyName("FuelType")]
+        public string fuelType { get; set; }
 
         public EngineSpec()
         {
@@ -83,12 +104,14 @@ namespace AutoDealerV2.src.Classes
     public class PackageSpec
     {
         //string name;
-        decimal price;
-        string description;
-        bool extraSpace;
-        bool reinforcedFloor;
-        bool LuggageRacks;
-        bool PerformanceMode;
+        [JsonPropertyName("Price")]
+        public decimal price { get; set; }
+        [JsonPropertyName("Description")]
+        public string description { get; set; }
+        public bool extraSpace { get; set; }
+        public bool reinforcedFloor { get; set; }
+        public bool LuggageRacks { get; set; }
+        public bool PerformanceMode { get; set; }
 
         public PackageSpec()
         {
@@ -103,10 +126,10 @@ namespace AutoDealerV2.src.Classes
 
     public class Pricelist
     {
-        Dictionary<string, ModelSpec> models;
-        Dictionary<string, PackageSpec> packages;
-        Dictionary<string, EngineSpec> engines;
-        Dictionary<string, decimal> colours;
+       public Dictionary<string, ModelSpec> models { get; set; }
+       public Dictionary<string, PackageSpec> packages { get; set; }
+       public Dictionary<string, EngineSpec> engines { get; set; }
+       public Dictionary<string, decimal> colours { get; set; }
 
         public Pricelist()
         {
@@ -120,10 +143,10 @@ namespace AutoDealerV2.src.Classes
                          Dictionary<string, PackageSpec> packages,
                          Dictionary<string, decimal> colours)
         {
-            models = models;
-            packages = packages;
-            engines = engines;
-            colours = colours;
+            this.models = models;
+            this.packages = packages;
+            this.engines = engines;
+            this.colours = colours;
         }
 
     }

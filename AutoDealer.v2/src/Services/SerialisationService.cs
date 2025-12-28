@@ -10,10 +10,10 @@ using AutoDealerV2.src.Classes;
 
 namespace AutoDealerV2.src.Services
 {
-    internal class SerialisationService
+    internal class SerialisationService<T>
     {
         private string pathname;
-        private ISerializer serializer;
+        private ISerializer<T> serializer;
 
         public SerialisationService(string pathname)
         {
@@ -31,22 +31,28 @@ namespace AutoDealerV2.src.Services
             switch (ext)
             {
                 case ".json":
-                   serializer =  new JSONSerialiserService();
+                   serializer =  new JSONSerialiserService<T>();
                     break;
                 case ".csv":
-                   serializer =  new CSVSerialiserService();
+                    if (typeof(T) != typeof(List<Vehicle>))
+                        throw new NotSupportedException(
+                            "CSV serialization is supported only for List<Vehicle>"
+                        );
+
+                    // cast is safe because of the type check above
+                    serializer = (ISerializer<T>)(object)new CSVSerialiserService();
                     break;
                 default: throw new NotSupportedException("Unsupported file extension");
             }
 
         }
 
-        public void Save(List<Vehicle> vehicles)
+        public void Save(T data)
         {
-            serializer.Save(vehicles,pathname);
+            serializer.Save(data,pathname);
         }
 
-        public List<Vehicle> Load()
+        public T Load()
         {
             return serializer.Load(pathname);
         }
